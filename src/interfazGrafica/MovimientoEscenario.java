@@ -21,19 +21,19 @@ public class MovimientoEscenario extends Thread {
 	
 	public void run() {
 		while(true) {
-			if(cont%40 == 0) {
+			if(cont%400 == 0) {
 				cont = 0;
 				this.tuberiaAlta.setLocation(400, this.tuberiaAlta.getY());
 				this.tuberiaBaja.setLocation(400, this.tuberiaBaja.getY());
 			}
 			
-			this.tuberiaAlta.setLocation(this.tuberiaAlta.getX() - (cont), this.tuberiaAlta.getY());
-			this.tuberiaBaja.setLocation(this.tuberiaBaja.getX() - (cont), this.tuberiaBaja.getY());
+			this.tuberiaAlta.setLocation(this.tuberiaAlta.getX() - (cont/100), this.tuberiaAlta.getY());
+			this.tuberiaBaja.setLocation(this.tuberiaBaja.getX() - (cont/100), this.tuberiaBaja.getY());
 			
 			cont++;
 			System.out.println(cont);
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
