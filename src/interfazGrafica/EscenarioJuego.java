@@ -22,11 +22,11 @@ public class EscenarioJuego implements KeyListener {
 	private JFrame frame;
 	private JPanel campoBola;
 	private JLabel bola;
-	private JLabel tuberiaAlta,tuberiaBaja;
+	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	
 	//Constants
-	private final int windowH = 400;
-	private final int windowW = 600;
+	private final int windowH = 600;
+	private final int windowW = 400;
 	private final int birdSize = 20;
 
 	//Construct
@@ -44,18 +44,28 @@ public class EscenarioJuego implements KeyListener {
 		bola.addKeyListener(this);
 		campoBola.add(bola);
 		
-		tuberiaAlta = new JLabel();
-		tuberiaAlta.setBounds(400, 0, 100, 250);
-		tuberiaAlta.setBorder(new LineBorder(Color.black));
-		frame.add(tuberiaAlta);
+		tuberiaAlta1 = new JLabel();
+		tuberiaAlta1.setBounds(400, 0, 100, 250);
+		tuberiaAlta1.setBorder(new LineBorder(Color.black));
+		frame.add(tuberiaAlta1);
 		
-		tuberiaBaja = new JLabel();
-		tuberiaBaja.setBounds(400,350, 100, 250);
-		tuberiaBaja.setBorder(new LineBorder(Color.black));
-		frame.add(tuberiaBaja);
+		tuberiaBaja1 = new JLabel();
+		tuberiaBaja1.setBounds(400,350, 100, 250);
+		tuberiaBaja1.setBorder(new LineBorder(Color.black));
+		frame.add(tuberiaBaja1);
+		
+		tuberiaAlta2 = new JLabel();
+		tuberiaAlta2.setBounds(650, 0, 100, 250);
+		tuberiaAlta2.setBorder(new LineBorder(Color.black));
+		frame.add(tuberiaAlta2);
+		
+		tuberiaBaja2 = new JLabel();
+		tuberiaBaja2.setBounds(650,350, 100, 250);
+		tuberiaBaja2.setBorder(new LineBorder(Color.black));
+		frame.add(tuberiaBaja2);
 		
 		pelota = new PelotaQueSeMueve(bola, this);
-		tubos = new MovimientoEscenario(tuberiaBaja,tuberiaAlta,this);
+		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
 		pelota.start();
 		tubos.start();
 		
