@@ -27,7 +27,7 @@ public class PelotaQueSeMueve extends Thread {
 			this.pajarito.setLocation(this.pajarito.getX() + (10*this.ejeDireccion), this.pajarito.getY());
 			
 			cont++;
-			System.out.println(cont);
+			//System.out.println(cont);
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
