@@ -36,7 +36,7 @@ public class EscenarioJuego {
 		campoBola.add(bola);
 		
 		tuberiaAlta = new JLabel();
-		tuberiaAlta.setBounds(200, 0, 100, 250);
+		tuberiaAlta.setBounds(400, 0, 100, 250);
 		tuberiaAlta.setBorder(new LineBorder(Color.black));
 		frame.add(tuberiaAlta);
 		

@@ -16,19 +16,22 @@ public class MovimientoEscenario extends Thread {
 		this.tuberiaAlta = tuberiaAlta;
 		this.tuberiaBaja = tuberiaBaja;
 		this.juego = juego;
+		//correrEscenario();
 	}
 	
-	public void correrEscenario() {
+	public void run() {
 		while(true) {
-			if(cont%10 == 0) {
-				this.ejeDireccion*=-1;
+			if(cont%40 == 0) {
+				cont = 0;
+				this.tuberiaAlta.setLocation(400, this.tuberiaAlta.getY());
+				this.tuberiaBaja.setLocation(400, this.tuberiaBaja.getY());
 			}
 			
-			this.tuberiaAlta.setLocation(this.tuberiaAlta.getX() + (10*this.ejeDireccion), this.tuberiaAlta.getY());
-			this.tuberiaBaja.setLocation(this.tuberiaBaja.getX() + (10*this.ejeDireccion), this.tuberiaBaja.getY());
+			this.tuberiaAlta.setLocation(this.tuberiaAlta.getX() - (cont), this.tuberiaAlta.getY());
+			this.tuberiaBaja.setLocation(this.tuberiaBaja.getX() - (cont), this.tuberiaBaja.getY());
 			
 			cont++;
-			//System.out.println(cont);
+			System.out.println(cont);
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
