@@ -7,7 +7,6 @@ import interfazGrafica.EscenarioJuego;
 public class PelotaQueSeMueve extends Thread {
 	//Attributes
 	private int ejeDireccion = 1;
-	private int cont = 0;
 	
 	//Objects
 	private JLabel pajarito;
@@ -20,18 +19,22 @@ public class PelotaQueSeMueve extends Thread {
 
 	public void run() {
 		while(true) {
-			if(cont%10 == 0) {
+			
+			if(this.pajarito.getX() + (10*this.ejeDireccion) <= 0) {
+				this.pajarito.setLocation(0, this.pajarito.getY());
 				this.ejeDireccion*=-1;
+			} else if(this.pajarito.getX() + (10*this.ejeDireccion) >= this.juego.getWindowW()) {
+				this.pajarito.setLocation(this.juego.getWindowW(), this.pajarito.getY());
+				this.ejeDireccion*=-1;
+			} else {
+				this.pajarito.setLocation(this.pajarito.getX() + (10*this.ejeDireccion), this.pajarito.getY());
 			}
 			
-			this.pajarito.setLocation(this.pajarito.getX() + (10*this.ejeDireccion), this.pajarito.getY());
+			this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + 10);
 			
-			cont++;
-			//System.out.println(cont);
 			try {
-				Thread.sleep(50);
+				Thread.sleep(33);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

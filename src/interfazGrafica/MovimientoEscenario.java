@@ -31,7 +31,7 @@ public class MovimientoEscenario extends Thread {
 			this.tuberiaBaja.setLocation(this.tuberiaBaja.getX() - (cont/100), this.tuberiaBaja.getY());
 			
 			cont++;
-			System.out.println(cont);
+			//System.out.println(cont);
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
