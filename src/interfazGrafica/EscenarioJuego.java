@@ -39,7 +39,7 @@ public class EscenarioJuego implements KeyListener {
 		campoBola.setLayout(null);
 		
 		bola = new JLabel(":V");
-		bola.setBounds(0, 150, this.birdSize,this.birdSize);
+		bola.setBounds(100, 150, this.birdSize,this.birdSize);
 		bola.setAlignmentX(SwingConstants.CENTER);
 		bola.addKeyListener(this);
 		campoBola.add(bola);

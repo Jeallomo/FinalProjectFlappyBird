@@ -20,20 +20,28 @@ public class PelotaQueSeMueve extends Thread {
 	public void run() {
 		while(true) {
 			
-			if(this.pajarito.getX() + (10*this.ejeDireccion) <= 0) {
-				this.pajarito.setLocation(0, this.pajarito.getY());
-				this.ejeDireccion*=-1;
-			} else if(this.pajarito.getX() + (10*this.ejeDireccion) >= this.juego.getWindowW()) {
-				this.pajarito.setLocation(this.juego.getWindowW(), this.pajarito.getY());
-				this.ejeDireccion*=-1;
-			} else {
-				this.pajarito.setLocation(this.pajarito.getX() + (10*this.ejeDireccion), this.pajarito.getY());
-			}
+//			if(this.pajarito.getX() + (10*this.ejeDireccion) <= 0) {
+//				this.pajarito.setLocation(0, this.pajarito.getY());
+//				this.ejeDireccion*=-1;
+//			} else if(this.pajarito.getX() + (10*this.ejeDireccion) >= this.juego.getWindowW()) {
+//				this.pajarito.setLocation(this.juego.getWindowW(), this.pajarito.getY());
+//				this.ejeDireccion*=-1;
+//			} else {
+//				this.pajarito.setLocation(this.pajarito.getX() + (10*this.ejeDireccion), this.pajarito.getY());
+//			}
 			
 			//this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + 10);
 			
+			
+			if(this.pajarito.getY() + (1*this.ejeDireccion) <= 0 || 
+					this.pajarito.getY() + (1*this.ejeDireccion) >= this.juego.getWindowH()) {
+				this.ejeDireccion *= -1;
+			} else {
+				this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY()+(1*this.ejeDireccion));
+			}
+			
 			try {
-				Thread.sleep(33);
+				Thread.sleep(7);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
