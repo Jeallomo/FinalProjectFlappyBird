@@ -46,22 +46,22 @@ public class EscenarioJuego implements KeyListener {
 		campoBola.add(bola);
 		
 		tuberiaAlta1 = new JLabel();
-		tuberiaAlta1.setBounds(400, 0, 100, 250);
+		tuberiaAlta1.setBounds(400, -350, 100, 600);
 		tuberiaAlta1.setBorder(new LineBorder(Color.black));
 		frame.add(tuberiaAlta1);
 		
 		tuberiaBaja1 = new JLabel();
-		tuberiaBaja1.setBounds(400,370, 100, 250);
+		tuberiaBaja1.setBounds(400,370, 100, 600);
 		tuberiaBaja1.setBorder(new LineBorder(Color.black));
 		frame.add(tuberiaBaja1);
 		
 		tuberiaAlta2 = new JLabel();
-		tuberiaAlta2.setBounds(650, 0, 100, 250);
+		tuberiaAlta2.setBounds(650, -350, 100, 600);
 		tuberiaAlta2.setBorder(new LineBorder(Color.black));
 		frame.add(tuberiaAlta2);
 		
 		tuberiaBaja2 = new JLabel();
-		tuberiaBaja2.setBounds(650,370, 100, 250);
+		tuberiaBaja2.setBounds(650,370, 100, 600);
 		tuberiaBaja2.setBorder(new LineBorder(Color.black));
 		frame.add(tuberiaBaja2);
 		

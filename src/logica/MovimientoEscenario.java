@@ -28,16 +28,19 @@ public class MovimientoEscenario extends Thread {
 	public void run() {
 		while(true) {
 			if(reubicacionTubos1%500 == 0) {
+				int altura = (int)(Math.random()*15-7);
+				System.out.println(altura);
 				reubicacionTubos1 = 0;
-				this.tuberiaAlta1.setLocation(400, this.tuberiaAlta1.getY());
-				this.tuberiaBaja1.setLocation(400, this.tuberiaBaja1.getY());
+				this.tuberiaAlta1.setLocation(400, this.tuberiaAlta1.getY()+altura*10);
+				this.tuberiaBaja1.setLocation(400, this.tuberiaBaja1.getY()+altura*10);
 				
 			}
 			if(reubicacionTubos2%500== 0) {
 				reubicacionTubos2 = 0;
-				
-				this.tuberiaAlta2.setLocation(400, this.tuberiaAlta1.getY());
-				this.tuberiaBaja2.setLocation(400, this.tuberiaBaja1.getY());
+				int altura = (int)(Math.random()*15-7);
+				System.out.println(altura);
+				this.tuberiaAlta2.setLocation(400, this.tuberiaAlta2.getY()+altura*10);
+				this.tuberiaBaja2.setLocation(400, this.tuberiaBaja2.getY()+altura*10);
 			}
 			
 			this.tuberiaAlta1.setLocation(this.tuberiaAlta1.getX() - 1, this.tuberiaAlta1.getY());
