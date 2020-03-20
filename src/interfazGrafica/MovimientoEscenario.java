@@ -30,7 +30,7 @@ public class MovimientoEscenario extends Thread {
 				this.tuberiaBaja1.setLocation(400, this.tuberiaBaja1.getY());
 				
 			}
-			if(reubicacionTubos2%500 == 0) {
+			if(reubicacionTubos2%500== 0) {
 				reubicacionTubos2 = 0;
 				
 				this.tuberiaAlta2.setLocation(400, this.tuberiaAlta1.getY());
