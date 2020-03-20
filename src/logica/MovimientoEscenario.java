@@ -1,6 +1,9 @@
-package interfazGrafica;
+package logica;
 
 import javax.swing.JLabel;
+
+import interfazGrafica.EscenarioJuego;
+
 
 
 public class MovimientoEscenario extends Thread {

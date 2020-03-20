@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import logica.MovimientoEscenario;
 import logica.PelotaQueSeMueve;
 
 public class EscenarioJuego implements KeyListener {
