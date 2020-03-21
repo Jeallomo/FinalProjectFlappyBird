@@ -2,9 +2,11 @@ package interfazGrafica;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class EscenarioJuego {
 	private JPanel campoBola;
 	private JLabel bola;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
+	private ImageIcon imagenTuboAlto,imagenTuboBajo;
 	
 	//Constants
 	private final int windowH = 600;
@@ -39,6 +42,9 @@ public class EscenarioJuego {
 		campoBola.setPreferredSize(new Dimension(this.windowW,this.windowH));
 		campoBola.setLayout(null);
 		
+		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
+		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
+		
 		bola = new JLabel(":V");
 		bola.setBounds(100, 150, this.birdSize,this.birdSize);
 		bola.setAlignmentX(SwingConstants.CENTER);
@@ -46,22 +52,22 @@ public class EscenarioJuego {
 		
 		tuberiaAlta1 = new JLabel();
 		tuberiaAlta1.setBounds(400, -350, 100, 600);
-		tuberiaAlta1.setBorder(new LineBorder(Color.black));
+		tuberiaAlta1.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaAlta1);
 		
 		tuberiaBaja1 = new JLabel();
 		tuberiaBaja1.setBounds(400,370, 100, 600);
-		tuberiaBaja1.setBorder(new LineBorder(Color.black));
+		tuberiaBaja1.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaBaja1);
 		
 		tuberiaAlta2 = new JLabel();
 		tuberiaAlta2.setBounds(650, -350, 100, 600);
-		tuberiaAlta2.setBorder(new LineBorder(Color.black));
+		tuberiaAlta2.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaAlta2);
 		
 		tuberiaBaja2 = new JLabel();
 		tuberiaBaja2.setBounds(650,370, 100, 600);
-		tuberiaBaja2.setBorder(new LineBorder(Color.black));
+		tuberiaBaja2.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaBaja2);
 		
 		pelota = new PelotaQueSeMueve(bola, this);

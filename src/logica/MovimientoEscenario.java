@@ -12,7 +12,6 @@ public class MovimientoEscenario extends Thread {
 	
 	private EscenarioJuego juego;
 	
-	private int ejeDireccion = 1;
 	private int reubicacionTubos1 = 0,reubicacionTubos2 = -250;
 	
 	
@@ -28,7 +27,7 @@ public class MovimientoEscenario extends Thread {
 	public void run() {
 		while(true) {
 			if(reubicacionTubos1%500 == 0) {
-				int altura = (int)(Math.random()*15-7);
+				int altura = (int)(Math.random()*40-20);
 				System.out.println(altura);
 				reubicacionTubos1 = 0;
 				this.tuberiaAlta1.setLocation(400, -350+altura*10);
@@ -37,7 +36,7 @@ public class MovimientoEscenario extends Thread {
 			}
 			if(reubicacionTubos2%500== 0) {
 				reubicacionTubos2 = 0;
-				int altura = (int)(Math.random()*15-7);
+				int altura = (int)(Math.random()*40-20);
 				System.out.println(altura);
 				this.tuberiaAlta2.setLocation(400, -350+altura*10);
 				this.tuberiaBaja2.setLocation(400, 370+altura*10);
