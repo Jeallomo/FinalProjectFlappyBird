@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 import logica.MovimientoEscenario;
 import logica.PelotaQueSeMueve;
 
-public class EscenarioJuego implements KeyListener {
+public class EscenarioJuego {
 	//Objects
 	private PelotaQueSeMueve pelota;
 	private MovimientoEscenario tubos;
@@ -42,7 +42,6 @@ public class EscenarioJuego implements KeyListener {
 		bola = new JLabel(":V");
 		bola.setBounds(100, 150, this.birdSize,this.birdSize);
 		bola.setAlignmentX(SwingConstants.CENTER);
-		bola.addKeyListener(this);
 		campoBola.add(bola);
 		
 		tuberiaAlta1 = new JLabel();
@@ -67,7 +66,8 @@ public class EscenarioJuego implements KeyListener {
 		
 		pelota = new PelotaQueSeMueve(bola, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
-		pelota.start();
+		frame.addKeyListener(pelota);
+		pelota.run();
 		tubos.start();
 		
 		frame.add(campoBola);
@@ -94,21 +94,4 @@ public class EscenarioJuego implements KeyListener {
 		return birdSize;
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("UP");
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		System.out.println("UP");
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
