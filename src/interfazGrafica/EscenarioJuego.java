@@ -67,7 +67,7 @@ public class EscenarioJuego {
 		pelota = new PelotaQueSeMueve(bola, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
 		frame.addKeyListener(pelota);
-		pelota.run();
+		pelota.start();
 		tubos.start();
 		
 		frame.add(campoBola);

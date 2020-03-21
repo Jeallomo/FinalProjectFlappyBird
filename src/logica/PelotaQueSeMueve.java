@@ -11,6 +11,7 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 	
 	// Attributes
 	private int ejeDireccion = 1;
+	private int StaticY;
 
 	// Objects
 	private JLabel pajarito;
@@ -26,12 +27,29 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 	public void run() {
 		while (true) {
 			
-			this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
+			if(this.ejeDireccion == 1) {
+				
+				this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
 
-			try {
-				Thread.sleep(7);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				try {
+					Thread.sleep(7);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(this.ejeDireccion == -1 && (this.StaticY-50 != this.pajarito.getY()) ) {
+				
+				this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
+
+				try {
+					Thread.sleep(7);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				this.ejeDireccion = 1;
 			}
 
 			this.juego.update();
@@ -43,7 +61,9 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY()-50);
+//			this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY()-50);
+			this.ejeDireccion *= -1;
+			this.StaticY = this.pajarito.getY();
 		}
 		
 	}
