@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import logica.Colisionador;
 import logica.MovimientoEscenario;
 import logica.PelotaQueSeMueve;
 
@@ -20,6 +21,7 @@ public class EscenarioJuego {
 	//Objects
 	private PelotaQueSeMueve pelota;
 	private MovimientoEscenario tubos;
+	private Colisionador col;
 	
 	//Components
 	private JFrame frame;
@@ -72,9 +74,12 @@ public class EscenarioJuego {
 		
 		pelota = new PelotaQueSeMueve(bola, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
+		col = new Colisionador(bola,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2);
+		
 		frame.addKeyListener(pelota);
 		pelota.start();
 		tubos.start();
+		col.start();
 		
 		frame.add(campoBola);
 		frame.pack();
