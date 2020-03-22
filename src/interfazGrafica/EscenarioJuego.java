@@ -28,14 +28,14 @@ public class EscenarioJuego {
 	//Components
 	private JFrame frame;
 	private JPanel campoBola;
-	private JLabel bola;
+	private JLabel bird;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
-	private ImageIcon imagenTuboAlto,imagenTuboBajo;
+	private ImageIcon imagenTuboAlto,imagenTuboBajo,imagenBird;
 	
 	//Constants
 	private final int windowH = 600;
 	private final int windowW = 500;
-	private final int birdSize = 20;
+	private final int birdSize = 40;
 
 	//Construct
 	public EscenarioJuego() {
@@ -48,35 +48,37 @@ public class EscenarioJuego {
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
+		imagenBird = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
 		
-		bola = new JLabel(":V");
-		bola.setBounds(100, 150, this.birdSize,this.birdSize);
-		bola.setAlignmentX(SwingConstants.CENTER);
-		campoBola.add(bola);
+		bird = new JLabel();
+		bird.setBounds(100, 150, this.birdSize,this.birdSize);
+		bird.setAlignmentX(SwingConstants.CENTER);
+		bird.setIcon(new ImageIcon(imagenBird.getImage().getScaledInstance(this.birdSize, this.birdSize, Image.SCALE_SMOOTH)));
+		campoBola.add(bird);
 		
 		tuberiaAlta1 = new JLabel();
-		tuberiaAlta1.setBounds(400, -350, 100, 600);
+		tuberiaAlta1.setBounds(500, -350, 100, 600);
 		tuberiaAlta1.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaAlta1);
 		
 		tuberiaBaja1 = new JLabel();
-		tuberiaBaja1.setBounds(400,370, 100, 600);
+		tuberiaBaja1.setBounds(500,370, 100, 600);
 		tuberiaBaja1.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaBaja1);
 		
 		tuberiaAlta2 = new JLabel();
-		tuberiaAlta2.setBounds(650, -350, 100, 600);
+		tuberiaAlta2.setBounds(850, -350, 100, 600);
 		tuberiaAlta2.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaAlta2);
 		
 		tuberiaBaja2 = new JLabel();
-		tuberiaBaja2.setBounds(650,370, 100, 600);
+		tuberiaBaja2.setBounds(800,370, 100, 600);
 		tuberiaBaja2.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaBaja2);
 		
-		pelota = new Pajaro(bola, this);
+		pelota = new Pajaro(bird, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
-		col = new Colisionador(bola,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this);
+		col = new Colisionador(bird,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this);
 		cod = new CodeListener(this);
 		
 		frame.addKeyListener(pelota);
