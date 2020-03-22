@@ -12,6 +12,7 @@ public class Pajaro extends Thread implements KeyListener {
 	// Attributes
 	private int ejeDireccion = 1;
 	private int StaticY;
+	private boolean terminar;
 
 	// Objects
 	private JLabel pajarito;
@@ -21,11 +22,12 @@ public class Pajaro extends Thread implements KeyListener {
 	public Pajaro(JLabel pajarito, EscenarioJuego juego) {
 		this.pajarito = pajarito;
 		this.juego = juego;
+		this.terminar = false;
 	}
 
 	// Method for Thread
 	public void run() {
-		while (true) {
+		while (!terminar) {
 			
 			if(this.ejeDireccion == 1) {
 				
@@ -54,6 +56,11 @@ public class Pajaro extends Thread implements KeyListener {
 
 			this.juego.update();
 		}
+	}
+	
+	//General Methods
+	public void endThread() {
+		this.terminar = true;
 	}
 	
 	// Methods for KeyListener

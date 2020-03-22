@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JOptionPane;
-
 import interfazGrafica.EscenarioJuego;
 
 public class CodeListener extends Thread implements KeyListener{

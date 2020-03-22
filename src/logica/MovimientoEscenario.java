@@ -8,11 +8,11 @@ import interfazGrafica.EscenarioJuego;
 
 public class MovimientoEscenario extends Thread {
 
+	//Attributes
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
-	
 	private EscenarioJuego juego;
-	
 	private int reubicacionTubos1 = 0,reubicacionTubos2 = -250;
+	private boolean terminar;
 	
 	
 	public MovimientoEscenario(JLabel tuberiaAlta1,JLabel tuberiaBaja1,JLabel tuberiaAlta2,JLabel tuberiaBaja2,EscenarioJuego juego) {
@@ -21,11 +21,11 @@ public class MovimientoEscenario extends Thread {
 		this.tuberiaAlta2 = tuberiaAlta2;
 		this.tuberiaBaja2 = tuberiaBaja2;
 		this.juego = juego;
-		//correrEscenario();
+		this.terminar = false;
 	}
 	
 	public void run() {
-		while(true) {
+		while(!terminar) {
 			if(reubicacionTubos1%500 == 0) {
 				int altura = (int)(Math.random()*40-20);
 				System.out.println(altura);
@@ -58,6 +58,10 @@ public class MovimientoEscenario extends Thread {
 			}
 			
 			this.juego.update();
+		}
 	}
+	
+	public void endThread() {
+		this.terminar = true;
 	}
 }

@@ -3,20 +3,24 @@ package logica;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import interfazGrafica.EscenarioJuego;
+
 public class Colisionador extends Thread{
 	private JLabel bird;
 	private JLabel tb1;
 	private JLabel tb2;
 	private JLabel tb3;
 	private JLabel tb4;
+	private EscenarioJuego ej;
 	
 	//Construct
-	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4) {
+	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4, EscenarioJuego ej) {
 		this.bird = bird;
 		this.tb1 = tb1;
 		this.tb2 = tb2;
 		this.tb3 = tb3;
 		this.tb4 = tb4;
+		this.ej = ej;
 	}
 	
 	//Methods
@@ -24,6 +28,8 @@ public class Colisionador extends Thread{
 		while(true) {
 			if(this.bird.getBounds().intersects(this.tb1.getBounds()) || this.bird.getBounds().intersects(this.tb2.getBounds())
 					|| this.bird.getBounds().intersects(this.tb3.getBounds()) || this.bird.getBounds().intersects(this.tb4.getBounds())) {
+				this.ej.getPelota().endThread();
+				this.ej.getTubos().endThread();
 				JOptionPane.showMessageDialog(null, "Perdiste!");
 			}
 			try {

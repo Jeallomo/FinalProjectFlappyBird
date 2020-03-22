@@ -76,7 +76,7 @@ public class EscenarioJuego {
 		
 		pelota = new Pajaro(bola, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
-		col = new Colisionador(bola,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2);
+		col = new Colisionador(bola,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this);
 		cod = new CodeListener(this);
 		
 		frame.addKeyListener(pelota);
@@ -113,7 +113,12 @@ public class EscenarioJuego {
 	public JPanel getCampoBola() {
 		return campoBola;
 	}
-	
-	
 
+	public Pajaro getPelota() {
+		return pelota;
+	}
+
+	public MovimientoEscenario getTubos() {
+		return tubos;
+	}
 }
