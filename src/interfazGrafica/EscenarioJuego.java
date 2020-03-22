@@ -30,7 +30,7 @@ public class EscenarioJuego {
 	
 	//Constants
 	private final int windowH = 600;
-	private final int windowW = 400;
+	private final int windowW = 500;
 	private final int birdSize = 20;
 
 	//Construct
