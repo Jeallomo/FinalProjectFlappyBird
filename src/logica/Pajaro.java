@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import interfazGrafica.EscenarioJuego;
 
-public class PelotaQueSeMueve extends Thread implements KeyListener {
+public class Pajaro extends Thread implements KeyListener {
 	
 	// Attributes
 	private int ejeDireccion = 1;
@@ -18,7 +18,7 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 	private EscenarioJuego juego;
 	
 	// Construct
-	public PelotaQueSeMueve(JLabel pajarito, EscenarioJuego juego) {
+	public Pajaro(JLabel pajarito, EscenarioJuego juego) {
 		this.pajarito = pajarito;
 		this.juego = juego;
 	}
@@ -59,13 +59,8 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 	// Methods for KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-//			this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY()-50);
-			this.ejeDireccion *= -1;
-			this.StaticY = this.pajarito.getY();
-		}
-		
+		this.ejeDireccion *= -1;
+		this.StaticY = this.pajarito.getY();
 	}
 
 	@Override
@@ -79,6 +74,4 @@ public class PelotaQueSeMueve extends Thread implements KeyListener {
 		
 		
 	}
-	
-	
 }

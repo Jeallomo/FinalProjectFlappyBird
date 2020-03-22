@@ -13,15 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import logica.CodeListener;
 import logica.Colisionador;
 import logica.MovimientoEscenario;
-import logica.PelotaQueSeMueve;
+import logica.Pajaro;
 
 public class EscenarioJuego {
 	//Objects
-	private PelotaQueSeMueve pelota;
+	private Pajaro pelota;
 	private MovimientoEscenario tubos;
 	private Colisionador col;
+	private CodeListener cod;
 	
 	//Components
 	private JFrame frame;
@@ -72,14 +74,17 @@ public class EscenarioJuego {
 		tuberiaBaja2.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		frame.add(tuberiaBaja2);
 		
-		pelota = new PelotaQueSeMueve(bola, this);
+		pelota = new Pajaro(bola, this);
 		tubos = new MovimientoEscenario(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
 		col = new Colisionador(bola,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2);
+		cod = new CodeListener(this);
 		
 		frame.addKeyListener(pelota);
+		frame.addKeyListener(cod);
 		pelota.start();
 		tubos.start();
 		col.start();
+		cod.start();
 		
 		frame.add(campoBola);
 		frame.pack();
@@ -104,5 +109,11 @@ public class EscenarioJuego {
 	public int getBirdSize() {
 		return birdSize;
 	}
+
+	public JPanel getCampoBola() {
+		return campoBola;
+	}
+	
+	
 
 }
