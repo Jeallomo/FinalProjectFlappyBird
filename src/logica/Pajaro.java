@@ -27,7 +27,7 @@ public class Pajaro extends Thread implements KeyListener {
 
 	// Method for Thread
 	public void run() {
-		while (!terminar) {
+		 do {
 			
 			if(this.ejeDireccion == 1) {
 				
@@ -40,22 +40,30 @@ public class Pajaro extends Thread implements KeyListener {
 				}
 			}
 			
-			if(this.ejeDireccion == -1 && (this.StaticY-50 != this.pajarito.getY()) ) {
+			while(this.ejeDireccion == -1) {
 				
-				this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
-
-				try {
-					Thread.sleep(7);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if(this.StaticY-50 != this.pajarito.getY()) {
+					
+					this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
+					
+					try {
+						Thread.sleep(7);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
 				}
-			}
-			else {
-				this.ejeDireccion = 1;
+				else {
+				
+					this.ejeDireccion = 1;
+			
+				}
 			}
 
 			this.juego.update();
-		}
+		
+		 } while (!terminar);
+		 
 	}
 	
 	//General Methods
@@ -66,7 +74,7 @@ public class Pajaro extends Thread implements KeyListener {
 	// Methods for KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
-		this.ejeDireccion *= -1;
+		this.ejeDireccion = -1;
 		this.StaticY = this.pajarito.getY();
 	}
 

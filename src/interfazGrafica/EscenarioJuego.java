@@ -34,6 +34,8 @@ public class EscenarioJuego implements KeyListener{
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
 	private ImageIcon imagenBird;
+	
+	// Attributes
 	private boolean jugando = false;
 	
 	// Constants
