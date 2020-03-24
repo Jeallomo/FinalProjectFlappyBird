@@ -32,7 +32,6 @@ public class CodeListener extends Thread implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		codigo = codigo + e.getKeyChar();
-		System.out.println(codigo);
 	}
 
 	@Override
