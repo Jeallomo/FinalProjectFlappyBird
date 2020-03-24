@@ -1,6 +1,7 @@
 package interfazGrafica;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,6 +17,7 @@ import logica.Colisionador;
 import logica.MovimientoEscenario;
 import logica.Pajaro;
 import logica.PanelBackground;
+import modelo.Puntaje;
 
 public class EscenarioJuego implements KeyListener{
 	// Objects
@@ -23,11 +25,13 @@ public class EscenarioJuego implements KeyListener{
 	private MovimientoEscenario tubos;
 	private Colisionador col;
 	private CodeListener cod;
+	private Puntaje db;
 	
 	// Components
 	private JFrame frame;
 	private JPanel campoJuego;
 	private PanelBackground titulo;
+	private JLabel mejorPuntaje;
 	private JLabel mensajeTitulo;
 	private JLabel bird;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
@@ -44,7 +48,9 @@ public class EscenarioJuego implements KeyListener{
 	private final int birdSize = 40;
 
 	// Construct
-	public EscenarioJuego() {
+	public EscenarioJuego(Puntaje db) {
+		this.db = db;
+		
 		frame = new JFrame("Flappy Bird");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -58,9 +64,15 @@ public class EscenarioJuego implements KeyListener{
 		campoJuego.add(titulo);
 		
 		mensajeTitulo = new JLabel("Presiona una tecla para jugar");
-		mensajeTitulo.setBounds(0, (200/2)-20, (this.windowW*3)/4, 30);
+		mensajeTitulo.setBounds(0, (200/2), (this.windowW*3)/4, 30);
 		mensajeTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.add(mensajeTitulo);
+		
+		mejorPuntaje = new JLabel();
+		mejorPuntaje.setBounds(0, 40, (this.windowW*3)/4, 30);
+		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
+		mejorPuntaje.setFont(new Font(mejorPuntaje.getFont().getFontName(), mejorPuntaje.getFont().getStyle(), 40));
+		titulo.add(mejorPuntaje);
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
@@ -103,10 +115,17 @@ public class EscenarioJuego implements KeyListener{
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
+		
+		this.update();
 	}
 	
 	// General Methods
 	public void update() {
+		if(this.db.getPuntajes().size() < 1) {
+			this.mejorPuntaje.setText("Best: 0");
+		} else {
+			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		}
 		frame.getContentPane().repaint();
 	}
 	
