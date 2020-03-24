@@ -67,7 +67,7 @@ public class EscenarioJuego implements KeyListener{
 		imagenBird = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
 		
 		bird = new JLabel();
-		bird.setBounds(100, 150, this.birdSize,this.birdSize);
+		bird.setBounds(100, 150, this.birdSize*2,this.birdSize);
 		bird.setAlignmentX(SwingConstants.CENTER);
 		bird.setIcon(new ImageIcon(imagenBird.getImage().getScaledInstance(this.birdSize, this.birdSize, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird);
