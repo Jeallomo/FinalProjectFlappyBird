@@ -27,48 +27,48 @@ public class Pajaro extends Thread implements KeyListener {
 
 	// Method for Thread
 	public void run() {
-		 do {
-			
-			if(this.ejeDireccion == 1) {
-				
-				this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
-
-				try {
-					Thread.sleep(7);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			while(this.ejeDireccion == -1) {
-				
-				if(this.StaticY-50 != this.pajarito.getY()) {
-					
+		 while(true) {
+			 while (!terminar) {
+				if(this.ejeDireccion == 1) {
 					this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
-					
 					try {
-						Thread.sleep(7);
+						Thread.sleep(4);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					
 				}
-				else {
-				
-					this.ejeDireccion = 1;
-			
+				while(this.ejeDireccion == -1) {
+					if(this.StaticY-60 != this.pajarito.getY()) {
+						this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
+						try {
+							Thread.sleep(3);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					else {
+						this.ejeDireccion = 1;
+					}
 				}
+				this.juego.update();
+			 }
+			this.pajarito.setLocation(100, 150);
+			 try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-
-			this.juego.update();
-		
-		 } while (!terminar);
-		 
+		 }
 	}
 	
 	//General Methods
-	public void endThread() {
+	public void pauseThread() {
 		this.terminar = true;
+	}
+	
+	public void resumeThread() {
+		this.terminar = false;
+		ejeDireccion = 1;
 	}
 	
 	// Methods for KeyListener

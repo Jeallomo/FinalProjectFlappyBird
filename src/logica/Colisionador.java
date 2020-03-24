@@ -1,7 +1,6 @@
 package logica;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import interfazGrafica.EscenarioJuego;
 
@@ -12,6 +11,7 @@ public class Colisionador extends Thread{
 	private JLabel tb3;
 	private JLabel tb4;
 	private EscenarioJuego ej;
+	private boolean terminar;
 	
 	//Construct
 	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4, EscenarioJuego ej) {
@@ -21,20 +21,29 @@ public class Colisionador extends Thread{
 		this.tb3 = tb3;
 		this.tb4 = tb4;
 		this.ej = ej;
+		this.terminar = false;
 	}
 	
 	//Methods
 	public void run() {
 		while(true) {
-			if(this.bird.getBounds().intersects(this.tb1.getBounds()) || this.bird.getBounds().intersects(this.tb2.getBounds())
-					|| this.bird.getBounds().intersects(this.tb3.getBounds()) || this.bird.getBounds().intersects(this.tb4.getBounds())) {
-				this.ej.getPelota().endThread();
-				this.ej.getTubos().endThread();
-				JOptionPane.showMessageDialog(null, "Perdiste!");
+			while(!terminar) {
+				if(this.bird.getBounds().intersects(this.tb1.getBounds()) || this.bird.getBounds().intersects(this.tb2.getBounds())
+						|| this.bird.getBounds().intersects(this.tb3.getBounds()) || this.bird.getBounds().intersects(this.tb4.getBounds())) {
+					this.ej.reset();
+					terminar = true;
+				}
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {	}
 			}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {	}
 		}
+	}
+	
+	public void resumeThread() {
+		terminar = false;
 	}
 }
