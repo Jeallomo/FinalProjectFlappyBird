@@ -1,7 +1,7 @@
 package logica;
 
 import interfazGrafica.EscenarioJuego;
-import modelo.Puntaje;
+import Modelo.Puntaje;
 
 public class MainClass {
 	public static void main(String[] args) {

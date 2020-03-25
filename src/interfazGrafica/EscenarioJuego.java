@@ -18,7 +18,7 @@ import logica.MovimientoTerreno;
 import logica.MovimientoTuberias;
 import logica.Pajaro;
 import logica.PanelBackground;
-import modelo.Puntaje;
+import Modelo.Puntaje;
 
 public class EscenarioJuego implements KeyListener{
 	// Objects
@@ -141,7 +141,7 @@ public class EscenarioJuego implements KeyListener{
 		tubos.pauseThread();
 		terrenos.start();
 		terrenos.pauseThread();
-		col.start();
+		//col.start();
 		cod.start();
 		
 		frame.addKeyListener(this);

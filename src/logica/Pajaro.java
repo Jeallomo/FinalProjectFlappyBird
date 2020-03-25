@@ -13,6 +13,7 @@ public class Pajaro extends Thread implements KeyListener {
 	private int ejeDireccion = 1;
 	private int StaticY;
 	private boolean terminar;
+	private boolean delay = false;
 
 	// Objects
 	private JLabel pajarito;
@@ -30,18 +31,27 @@ public class Pajaro extends Thread implements KeyListener {
 		 while(true) {
 			 while (!terminar) {
 				if(this.ejeDireccion == 1) {
+					if(delay) {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					delay = false;
 					this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
 					try {
-						Thread.sleep(4);
+						Thread.sleep(6);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
 				while(this.ejeDireccion == -1) {
-					if(this.StaticY-60 != this.pajarito.getY()) {
+					if(this.StaticY-45 != this.pajarito.getY()) {
 						this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
 						try {
-							Thread.sleep(3);
+							Thread.sleep(4);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -76,6 +86,7 @@ public class Pajaro extends Thread implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		this.ejeDireccion = -1;
 		this.StaticY = this.pajarito.getY();
+		delay = true;
 	}
 
 	@Override

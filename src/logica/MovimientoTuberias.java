@@ -28,7 +28,7 @@ public class MovimientoTuberias extends Thread {
 		while(true) {
 			while(!terminar) {
 				if(reubicacionTubos1%600 == 0) {
-					int altura = (int)(Math.random()*40-20);
+					int altura = (int)(Math.random()*30-18);
 					reubicacionTubos1 = 0;
 					this.tuberiaAlta1.setLocation(500, -350+altura*10);
 					this.tuberiaBaja1.setLocation(500, 370+altura*10);
@@ -36,7 +36,7 @@ public class MovimientoTuberias extends Thread {
 				}
 				if(reubicacionTubos2%600== 0) {
 					reubicacionTubos2 = 0;
-					int altura = (int)(Math.random()*40-20);
+					int altura = (int)(Math.random()*30-18);
 					this.tuberiaAlta2.setLocation(500, -350+altura*10);
 					this.tuberiaBaja2.setLocation(500, 370+altura*10);
 				}
