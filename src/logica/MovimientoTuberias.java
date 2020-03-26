@@ -46,6 +46,13 @@ public class MovimientoTuberias extends Thread {
 				this.tuberiaAlta2.setLocation(this.tuberiaAlta2.getX() - 1, this.tuberiaAlta2.getY());
 				this.tuberiaBaja2.setLocation(this.tuberiaBaja2.getX() - 1, this.tuberiaBaja2.getY());
 				
+				if(this.tuberiaAlta1.getX() + 100 == this.juego.getBird().getX()) {
+					this.juego.addPunto();
+				}
+				if(this.tuberiaAlta2.getX() + 100 == this.juego.getBird().getX()) {
+					this.juego.addPunto();
+				}
+				
 				reubicacionTubos1++;
 				reubicacionTubos2++;
 				

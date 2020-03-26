@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +17,8 @@ public class Puntaje implements Serializable{
 	private ArrayList<Integer> puntajes = new ArrayList<Integer>();
 	
 	//Constructs
-
-	public Puntaje(){
-		int i;
-		int j;
-		int aux;
-		
+	@SuppressWarnings("unchecked")
+	public Puntaje(){		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("puntos.txt"));
 			Object obj = ois.readObject();
@@ -34,16 +30,7 @@ public class Puntaje implements Serializable{
 					if(((ArrayList<?>) obj).get(0) instanceof Integer) {
 						
 						this.puntajes = (ArrayList<Integer>)obj;
-						
-						for(i=0; i<this.puntajes.size(); i++) {
-							for(j=0; j<this.puntajes.size(); j++) {
-								if(this.puntajes.get(i) > this.puntajes.get(j)) {
-									aux = this.puntajes.get(i);
-									this.puntajes.set(i, this.puntajes.get(j));
-									this.puntajes.set(j, aux);
-								}
-							}
-						}
+						this.ordenarPuntos();
 					}
 				}
 			}
@@ -71,6 +58,22 @@ public class Puntaje implements Serializable{
 		} 
 		catch (FileNotFoundException fnfe) {} 
 		catch (IOException ioe) {}
+	}
+	
+	public void ordenarPuntos() {
+		int i;
+		int j;
+		int aux;
+		
+		for(i=0; i<this.puntajes.size(); i++) {
+			for(j=0; j<this.puntajes.size(); j++) {
+				if(this.puntajes.get(i) > this.puntajes.get(j)) {
+					aux = this.puntajes.get(i);
+					this.puntajes.set(i, this.puntajes.get(j));
+					this.puntajes.set(j, aux);
+				}
+			}
+		}
 	}
 
 	//Getters
