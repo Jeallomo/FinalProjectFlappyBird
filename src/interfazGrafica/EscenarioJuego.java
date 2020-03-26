@@ -5,7 +5,13 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,7 +61,7 @@ public class EscenarioJuego implements KeyListener{
 	// Constants
 	private final int windowH = 600;
 	private final int windowW = 500;
-	private final int birdSizeW = 35;
+	private final int birdSizeW = 40;
 	private final int birdSizeH = 40;
 
 	// Construct
@@ -110,8 +116,7 @@ public class EscenarioJuego implements KeyListener{
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
-		bird.setBounds(100, 150, this.birdSizeW*2,this.birdSizeW);
-		bird.setAlignmentX(SwingConstants.CENTER);
+		bird.setBounds(100, 150, this.birdSizeW,this.birdSizeH);
 		bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird, new Integer(0));
 		
@@ -172,6 +177,22 @@ public class EscenarioJuego implements KeyListener{
 		frame.setResizable(false);
 		
 		this.update();
+		
+		//Audio
+		try {
+			Clip music = AudioSystem.getClip();
+			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
+			
+			//Volumen
+			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -37.0);
+			
+			music.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (LineUnavailableException e) {} catch (IOException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// General Methods
@@ -231,8 +252,6 @@ public class EscenarioJuego implements KeyListener{
 			} else {
 				this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 			}
-			
-			
 			
 			campoJuego.remove(titulo);
 			frame.addKeyListener(pelota);

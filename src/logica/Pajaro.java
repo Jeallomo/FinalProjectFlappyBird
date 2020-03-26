@@ -3,7 +3,13 @@ package logica;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -14,6 +20,7 @@ public class Pajaro extends Thread implements KeyListener {
 	// Objects
 	private JLabel pajarito;
 	private EscenarioJuego juego;
+	private Clip clip;
 	
 	// Attributes
 	private int ejeDireccion = 1;
@@ -28,6 +35,20 @@ public class Pajaro extends Thread implements KeyListener {
 		this.pajarito = pajarito;
 		this.juego = juego;
 		this.terminar = false;
+		
+		try {
+			clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/jump.wav")));
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// Method for Thread
@@ -118,6 +139,23 @@ public class Pajaro extends Thread implements KeyListener {
 		delay = true;
 		alturaDePaso = this.StaticY;
 		velocidad = 0;
+
+		try {
+			clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/jump.wav")));
+			FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -30.0);
+			clip.loop(0);
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
