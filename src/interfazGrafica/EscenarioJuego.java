@@ -40,6 +40,7 @@ public class EscenarioJuego implements KeyListener{
 	private JLabel bird;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	private JLabel terreno1, terreno2;
+	private JLabel lblPuntos;
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
 	private ImageIcon imagenBird;
@@ -47,6 +48,7 @@ public class EscenarioJuego implements KeyListener{
 	
 	// Attributes
 	private boolean jugando = false;
+	private int puntos = 0;
 	
 	// Constants
 	private final int windowH = 600;
@@ -83,6 +85,11 @@ public class EscenarioJuego implements KeyListener{
 		titulo.add(mensajeTitulo);
 		
 		mejorPuntaje = new JLabel();
+		if(this.db.getPuntajes().size() < 1) {
+			this.mejorPuntaje.setText("Best: 0");
+		} else {
+			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		}
 		mejorPuntaje.setBounds(0, 40, (this.windowW*3)/4, 30);
 		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
 		mejorPuntaje.setFont(new Font(mejorPuntaje.getFont().getFontName(), mejorPuntaje.getFont().getStyle(), 40));
@@ -129,6 +136,10 @@ public class EscenarioJuego implements KeyListener{
 		terreno2.setIcon(new ImageIcon(terreno.getImage()));
 		campoJuego.add(terreno2, new Integer(2));
 		
+		lblPuntos = new JLabel("Score: " + this.puntos);
+		lblPuntos.setBounds(15, 10, this.windowW, 20);
+		campoJuego.add(lblPuntos, new Integer(2));
+		
 		pelota = new Pajaro(bird, this);
 		tubos = new MovimientoTuberias(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
 		col = new Colisionador(bird,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this, terreno1, terreno2);
@@ -156,11 +167,7 @@ public class EscenarioJuego implements KeyListener{
 	
 	// General Methods
 	public void update() {
-		if(this.db.getPuntajes().size() < 1) {
-			this.mejorPuntaje.setText("Best: 0");
-		} else {
-			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
-		}
+		lblPuntos.setText("Score: " + this.puntos);
 		frame.getContentPane().repaint();
 	}
 	
@@ -178,8 +185,27 @@ public class EscenarioJuego implements KeyListener{
 		this.tuberiaBaja2.setLocation(800,370);
 		
 		campoJuego.add(titulo, new Integer(3));
+		this.db.addPuntos(this.puntos);
+		this.db.ordenarPuntos();
+		
+		this.resetPuntos();
+		
+		if(this.db.getPuntajes().size() < 1) {
+			this.mejorPuntaje.setText("Best: 0");
+		} else {
+			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		}
+		
 		this.update();
 		this.jugando = false;
+	}
+	
+	public void addPunto() {
+		this.puntos++;
+	}
+	
+	public void resetPuntos() {
+		this.puntos = 0;
 	}
 	
 	// Methods for KeyListener
@@ -233,5 +259,9 @@ public class EscenarioJuego implements KeyListener{
 
 	public MovimientoTuberias getTubos() {
 		return tubos;
+	}
+
+	public JLabel getBird() {
+		return bird;
 	}
 }
