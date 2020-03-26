@@ -20,6 +20,7 @@ import logica.Pajaro;
 import logica.PanelBackground;
 import modelo.Puntaje;
 
+
 public class EscenarioJuego implements KeyListener{
 	// Objects
 	private Pajaro pelota;
