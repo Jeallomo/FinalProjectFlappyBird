@@ -35,7 +35,10 @@ public class Colisionador extends Thread{
 				if(this.bird.getBounds().intersects(this.tb1.getBounds()) || this.bird.getBounds().intersects(this.tb2.getBounds())
 						|| this.bird.getBounds().intersects(this.tb3.getBounds()) || this.bird.getBounds().intersects(this.tb4.getBounds())
 						|| this.bird.getBounds().intersects(this.t1.getBounds()) || this.bird.getBounds().intersects(this.t2.getBounds())) {
+					
+			
 					this.ej.reset();
+					
 					terminar = true;
 				}
 				try {

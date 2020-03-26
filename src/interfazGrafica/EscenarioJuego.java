@@ -181,31 +181,22 @@ public class EscenarioJuego implements KeyListener{
 	}
 	
 	public void reset() {
+	
+		
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
-		
-		pelota.pauseThread();
 		tubos.pauseThread();
 		terrenos.pauseThread();
-		
-		this.tuberiaAlta1.setLocation(500, -350);
-		this.tuberiaBaja1.setLocation(500,370);
-		this.tuberiaAlta2.setLocation(850, -350);
-		this.tuberiaBaja2.setLocation(800,370);
-		
 		campoJuego.add(titulo, new Integer(3));
-		this.db.addPuntos(this.puntos);
-		this.db.ordenarPuntos();
 		
-		this.resetPuntos();
-		
-		if(this.db.getPuntajes().size() < 1) {
-			this.mejorPuntaje.setText("Best: 0");
-		} else {
-			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		while(bird.getY() <= windowH-100-birdSizeW) {
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {	}
 		}
 		
-		this.update();
+		pelota.pauseThread();
+		
 		this.jugando = false;
 	}
 	
@@ -221,6 +212,28 @@ public class EscenarioJuego implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(this.jugando == false) {
+			
+			this.tuberiaAlta1.setLocation(500, -350);
+			this.tuberiaBaja1.setLocation(500,370);
+			this.tuberiaAlta2.setLocation(850, -350);
+			this.tuberiaBaja2.setLocation(800,370);
+			this.bird.setLocation(100, 150);
+			this.update();
+			pelota.velocidad = 0;
+			
+			this.db.addPuntos(this.puntos);
+			this.db.ordenarPuntos();
+			
+			this.resetPuntos();
+			
+			if(this.db.getPuntajes().size() < 1) {
+				this.mejorPuntaje.setText("Best: 0");
+			} else {
+				this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+			}
+			
+			
+			
 			campoJuego.remove(titulo);
 			frame.addKeyListener(pelota);
 			frame.addKeyListener(cod);
