@@ -18,7 +18,7 @@ import logica.MovimientoTerreno;
 import logica.MovimientoTuberias;
 import logica.Pajaro;
 import logica.PanelBackground;
-import Modelo.Puntaje;
+import modelo.Puntaje;
 
 public class EscenarioJuego implements KeyListener{
 	// Objects
@@ -90,7 +90,7 @@ public class EscenarioJuego implements KeyListener{
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
-		imagenBird = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
+		imagenBird = new ImageIcon(getClass().getResource("/Imagenes/Pajaros/bird 0.png"));
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
@@ -131,7 +131,7 @@ public class EscenarioJuego implements KeyListener{
 		
 		pelota = new Pajaro(bird, this);
 		tubos = new MovimientoTuberias(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
-		col = new Colisionador(bird,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this);
+		col = new Colisionador(bird,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this, terreno1, terreno2);
 		terrenos = new MovimientoTerreno(terreno1, terreno2, this);
 		cod = new CodeListener(this);
 		
@@ -141,7 +141,7 @@ public class EscenarioJuego implements KeyListener{
 		tubos.pauseThread();
 		terrenos.start();
 		terrenos.pauseThread();
-		//col.start();
+		col.start();
 		cod.start();
 		
 		frame.addKeyListener(this);
