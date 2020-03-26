@@ -100,6 +100,9 @@ public class Pajaro extends Thread implements KeyListener {
 	public void pauseThread() {
 		this.terminar = true;
 	}
+	public void animacionCaida() {
+		
+	}
 	
 	public void resumeThread() {
 		this.terminar = false;
