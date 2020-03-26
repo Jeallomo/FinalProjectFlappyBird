@@ -31,15 +31,15 @@ public class EscenarioJuego implements KeyListener{
 	
 	// Components
 	private JFrame frame;
-	private PanelBackground fondo;
-	private PanelBackground suelo;
-	private JLayeredPane campoJuego;
-	private PanelBackground titulo;
 	private JLabel mejorPuntaje;
 	private JLabel mensajeTitulo;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	private JLabel terreno1, terreno2;
 	private JLabel lblPuntos;
+	private PanelBackground fondo;
+	private PanelBackground suelo;
+	private JLayeredPane campoJuego;
+	private PanelBackground titulo;
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
 	private ImageIcon terreno;
