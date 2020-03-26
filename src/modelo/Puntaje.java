@@ -17,7 +17,7 @@ public class Puntaje implements Serializable{
 	private ArrayList<Integer> puntajes = new ArrayList<Integer>();
 	
 	//Constructs
-	@SuppressWarnings("unchecked")
+
 	public Puntaje(){
 		int i;
 		int j;

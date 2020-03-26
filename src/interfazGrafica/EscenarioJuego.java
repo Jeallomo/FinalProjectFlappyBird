@@ -37,13 +37,14 @@ public class EscenarioJuego implements KeyListener{
 	private PanelBackground titulo;
 	private JLabel mejorPuntaje;
 	private JLabel mensajeTitulo;
-	private JLabel bird;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	private JLabel terreno1, terreno2;
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
-	private ImageIcon imagenBird;
 	private ImageIcon terreno;
+	
+	public ImageIcon imagenBird0,imagenBirdArriba,imagenBird20,imagenBird45,imagenBird90,imagenBird75;
+	public JLabel bird;
 	
 	// Attributes
 	private boolean jugando = false;
@@ -51,7 +52,8 @@ public class EscenarioJuego implements KeyListener{
 	// Constants
 	private final int windowH = 600;
 	private final int windowW = 500;
-	private final int birdSize = 40;
+	private final int birdSizeW = 35;
+	private final int birdSizeH = 40;
 
 	// Construct
 	public EscenarioJuego(Puntaje db) {
@@ -59,6 +61,13 @@ public class EscenarioJuego implements KeyListener{
 		
 		frame = new JFrame("Flappy Bird");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		imagenBird0 = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
+		imagenBirdArriba = new ImageIcon(getClass().getResource("/Imagenes/bird20.png"));
+		imagenBird20 = new ImageIcon(getClass().getResource("/Imagenes/bird -20.png"));
+		imagenBird45 = new ImageIcon(getClass().getResource("/Imagenes/bird -45.png"));
+		imagenBird75 = new ImageIcon(getClass().getResource("/Imagenes/bird -75.png"));
+		imagenBird90 = new ImageIcon(getClass().getResource("/Imagenes/bird -90.png"));
 		
 		campoJuego = new JLayeredPane();
 		campoJuego.setPreferredSize(new Dimension(this.windowW,this.windowH));
@@ -90,13 +99,12 @@ public class EscenarioJuego implements KeyListener{
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
-		imagenBird = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
-		bird.setBounds(100, 150, this.birdSize*2,this.birdSize);
+		bird.setBounds(100, 150, this.birdSizeW*2,this.birdSizeW);
 		bird.setAlignmentX(SwingConstants.CENTER);
-		bird.setIcon(new ImageIcon(imagenBird.getImage().getScaledInstance(this.birdSize, this.birdSize, Image.SCALE_SMOOTH)));
+		bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird, new Integer(0));
 		
 		tuberiaAlta1 = new JLabel();
@@ -141,7 +149,7 @@ public class EscenarioJuego implements KeyListener{
 		tubos.pauseThread();
 		terrenos.start();
 		terrenos.pauseThread();
-		//col.start();
+		col.start();
 		cod.start();
 		
 		frame.addKeyListener(this);
@@ -219,8 +227,12 @@ public class EscenarioJuego implements KeyListener{
 		return windowW;
 	}
 
-	public int getBirdSize() {
-		return birdSize;
+	public int getBirdSizeW() {
+		return birdSizeW;
+	}
+	
+	public int getBirdSizeH() {
+		return birdSizeH;
 	}
 
 	public JLayeredPane getCampoBola() {

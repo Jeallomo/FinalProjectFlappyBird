@@ -1,23 +1,27 @@
 package logica;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import interfazGrafica.EscenarioJuego;
 
 public class Pajaro extends Thread implements KeyListener {
+
+	// Objects
+	private JLabel pajarito;
+	private EscenarioJuego juego;
 	
 	// Attributes
 	private int ejeDireccion = 1;
 	private int StaticY;
 	private boolean terminar;
 	private boolean delay = false;
+	private int alturaDePaso = 150;
 
-	// Objects
-	private JLabel pajarito;
-	private EscenarioJuego juego;
 	
 	// Construct
 	public Pajaro(JLabel pajarito, EscenarioJuego juego) {
@@ -39,8 +43,29 @@ public class Pajaro extends Thread implements KeyListener {
 							e1.printStackTrace();
 						}
 					}
+					//juego.bird.setIcon(new ImageIcon(juego.imagenBird0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
 					delay = false;
 					this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (1 * this.ejeDireccion));
+					
+					if(alturaDePaso - this.pajarito.getY() == 0) {
+						System.out.println("pasa 0");
+						juego.bird.setIcon(new ImageIcon(juego.imagenBird0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW()-10, Image.SCALE_SMOOTH)));
+					}
+					if(this.pajarito.getY()- alturaDePaso  >= 10 & this.pajarito.getY()- alturaDePaso < 30) {
+						juego.bird.setIcon(new ImageIcon(juego.imagenBird20.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+					}
+					if(this.pajarito.getY() - alturaDePaso >= 30 & this.pajarito.getY() - alturaDePaso < 50) {
+						juego.bird.setIcon(new ImageIcon(juego.imagenBird45.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+					}
+					if(this.pajarito.getY() - alturaDePaso >= 50 & this.pajarito.getY() - alturaDePaso < 70) {
+						juego.bird.setIcon(new ImageIcon(juego.imagenBird75.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+					}
+					if( this.pajarito.getY() - alturaDePaso >=   70) {
+						juego.bird.setIcon(new ImageIcon(juego.imagenBird90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+					}
+				
+					System.out.println(this.pajarito.getY() - alturaDePaso);
+					
 					try {
 						Thread.sleep(6);
 					} catch (InterruptedException e) {
@@ -86,7 +111,9 @@ public class Pajaro extends Thread implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		this.ejeDireccion = -1;
 		this.StaticY = this.pajarito.getY();
+		juego.bird.setIcon(new ImageIcon(juego.imagenBirdArriba.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
 		delay = true;
+		alturaDePaso = this.StaticY;
 	}
 
 	@Override
