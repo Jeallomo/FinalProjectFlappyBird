@@ -59,11 +59,13 @@ public class EscenarioJuego implements KeyListener{
 	private ImageIcon terreno;
 	
 	public ImageIcon imagenBird0,imagenBirdArriba,imagenBird20,imagenBird45,imagenBird90,imagenBird75;
+	public ImageIcon imagenPorky;
 	public JLabel bird;
 	
 	// Attributes
 	private int jugando = 0;
 	private int puntos = 0;
+	private String activePJ = "bird/bird";
 	
 	// Constants
 	private final int windowH = 600;
@@ -82,12 +84,13 @@ public class EscenarioJuego implements KeyListener{
 		frame = new JFrame("Flappy Bird");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		imagenBird0 = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
-		imagenBirdArriba = new ImageIcon(getClass().getResource("/Imagenes/bird20.png"));
-		imagenBird20 = new ImageIcon(getClass().getResource("/Imagenes/bird -20.png"));
-		imagenBird45 = new ImageIcon(getClass().getResource("/Imagenes/bird -45.png"));
-		imagenBird75 = new ImageIcon(getClass().getResource("/Imagenes/bird -75.png"));
-		imagenBird90 = new ImageIcon(getClass().getResource("/Imagenes/bird -90.png"));
+		imagenBird0 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird.png"));
+		imagenBirdArriba = new ImageIcon(getClass().getResource("/Imagenes/bird/bird20.png"));
+		imagenBird20 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -20.png"));
+		imagenBird45 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -45.png"));
+		imagenBird75 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -75.png"));
+		imagenBird90 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -90.png"));
+		imagenPorky = new ImageIcon(getClass().getResource("/Imagenes/porky/porky.png"));
 		
 		campoJuego = new JLayeredPane();
 		campoJuego.setPreferredSize(new Dimension(this.windowW,this.windowH));
@@ -188,7 +191,6 @@ public class EscenarioJuego implements KeyListener{
 		frame.setResizable(false);
 		
 		this.update();
-		//this.addMusic();
 	}
 	
 	// General Methods
@@ -203,6 +205,7 @@ public class EscenarioJuego implements KeyListener{
 	 * Método reinicia el juego
 	 */
 	public void reset() {
+
 		this.db.addPuntos(this.puntos);
 		this.db.ordenarPuntos();
 		
@@ -298,7 +301,9 @@ public class EscenarioJuego implements KeyListener{
 		if(this.jugando == 0) {
 			this.resetPuntos();
 			
-			bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
+			if(this.activePJ == "bird/bird") {
+				bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
+			}
 			
 			this.tuberiaAlta1.setLocation(500, -350);
 			this.tuberiaBaja1.setLocation(500,370);
@@ -352,6 +357,18 @@ public class EscenarioJuego implements KeyListener{
 		return campoJuego;
 	}
 
+	public JLayeredPane getCampoJuego() {
+		return campoJuego;
+	}
+
+	public PanelBackground getFondo() {
+		return fondo;
+	}
+
+	public void setFondo(PanelBackground fondo) {
+		this.fondo = fondo;
+	}
+
 	public Pajaro getPelota() {
 		return pelota;
 	}
@@ -363,4 +380,22 @@ public class EscenarioJuego implements KeyListener{
 	public JLabel getBird() {
 		return bird;
 	}
+
+	public void setActivePJ(String activePJ) {
+		this.activePJ = activePJ;
+	}
+
+	public ImageIcon getImagenPorky() {
+		return imagenPorky;
+	}
+
+	public String getActivePJ() {
+		return activePJ;
+	}
+
+	public JLabel getLblPuntos() {
+		return lblPuntos;
+	}
+	
+	
 }

@@ -1,8 +1,11 @@
 package logica;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.ImageIcon;
 
 import interfazGrafica.EscenarioJuego;
 /**
@@ -25,7 +28,32 @@ public class CodeListener extends Thread implements KeyListener{
 	public void run() {
 		while(true){
 			if(codigo.indexOf("night") != -1) {
-				this.ej.getCampoBola().setBackground(Color.black);
+				this.ej.getCampoJuego().remove(this.ej.getFondo());
+				this.ej.setFondo(new PanelBackground("/Imagenes/fondoNoche.png"));
+				this.ej.getFondo().setBounds(0, 0,this.ej.getWindowW(), this.ej.getWindowH()-95);
+				this.ej.getCampoJuego().add(this.ej.getFondo(), new Integer(-1));
+				this.ej.getLblPuntos().setForeground(Color.white);
+				this.codigo = "";
+				this.ej.update();
+			}
+			if(codigo.indexOf("day") != -1) {
+				this.ej.getCampoJuego().remove(this.ej.getFondo());
+				this.ej.setFondo(new PanelBackground("/Imagenes/fondo.png"));
+				this.ej.getFondo().setBounds(0, 0,this.ej.getWindowW(), this.ej.getWindowH()-95);
+				this.ej.getCampoJuego().add(this.ej.getFondo(), new Integer(-1));
+				this.ej.getLblPuntos().setForeground(Color.black);
+				this.codigo = "";
+				this.ej.update();
+			}
+			if(codigo.indexOf("duque") != -1) {
+				if(this.ej.getActivePJ() == "porky/porky") {
+					this.ej.setActivePJ("bird/bird");
+					
+				} else {
+					this.ej.setActivePJ("porky/porky");
+					this.ej.getBird().setIcon(new ImageIcon(this.ej.getImagenPorky().getImage().getScaledInstance(this.ej.getBirdSizeH(), this.ej.getBirdSizeW(), Image.SCALE_SMOOTH)));
+				}
+				this.codigo = "";
 			}
 			try {
 				Thread.sleep(1);
