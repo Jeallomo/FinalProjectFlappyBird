@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 
+ * Declaración de clase Puntaje
  * @author Santiago Herrera
  * @version
  *

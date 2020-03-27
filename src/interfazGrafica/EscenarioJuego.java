@@ -1,6 +1,7 @@
 package interfazGrafica;
 
 import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -26,7 +27,12 @@ import logica.Pajaro;
 import logica.PanelBackground;
 import modelo.Puntaje;
 
-
+/**
+ * Declaración de clase EscenarioJuego
+ * @author Jesus Lozada.
+ * @version 
+ *
+ */
 public class EscenarioJuego implements KeyListener{
 	// Objects
 	private Pajaro pelota;
@@ -66,6 +72,10 @@ public class EscenarioJuego implements KeyListener{
 	private final int birdSizeH = 40;
 
 	// Construct
+	/**
+	 * Constructor de ventana principal
+	 * @param db
+	 */
 	public EscenarioJuego(Puntaje db) {
 		this.db = db;
 		
@@ -182,11 +192,16 @@ public class EscenarioJuego implements KeyListener{
 	}
 	
 	// General Methods
+	/**
+	 * Método repinta la pantalla
+	 */
 	public void update() {
 		lblPuntos.setText("Score: " + this.puntos);
 		frame.getContentPane().repaint();
 	}
-	
+	/**
+	 * Método reinicia el juego
+	 */
 	public void reset() {
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
@@ -225,15 +240,21 @@ public class EscenarioJuego implements KeyListener{
 		
 		this.jugando = false;
 	}
-	
+	/**
+	 * Método suma un punto
+	 */
 	public void addPunto() {
 		this.puntos++;
 	}
-	
+	/**
+	 * Método reinicia el puntaje
+	 */
 	public void resetPuntos() {
 		this.puntos = 0;
 	}
-	
+	/**
+	 * Método añade música al juego
+	 */
 	public void addMusic() {
 		try {
 			music = AudioSystem.getClip();
@@ -256,7 +277,7 @@ public class EscenarioJuego implements KeyListener{
 	}
 	
 	// Methods for KeyListener
-	@Override
+	
 	public void keyPressed(KeyEvent e) {
 		if(this.jugando == false) {
 			

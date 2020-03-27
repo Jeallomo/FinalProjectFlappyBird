@@ -11,6 +11,12 @@ import javax.swing.JLabel;
 
 import interfazGrafica.EscenarioJuego;
 
+/**
+ * Declaración de clase Colisionador
+ * @author Jesus Lozada
+ * @version
+ *
+ */
 public class Colisionador extends Thread{
 	//Attributes
 	private Clip clip;
@@ -27,6 +33,17 @@ public class Colisionador extends Thread{
 	private boolean terminar;
 	
 	//Construct
+	/**
+	 * Constructor Colisionador
+	 * @param bird
+	 * @param tb1
+	 * @param tb2
+	 * @param tb3
+	 * @param tb4
+	 * @param ej
+	 * @param t1
+	 * @param t2
+	 */
 	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4, EscenarioJuego ej, JLabel t1, JLabel t2) {
 		this.bird = bird;
 		this.tb1 = tb1;
@@ -40,6 +57,9 @@ public class Colisionador extends Thread{
 	}
 	
 	//Methods
+	/**
+	 * Metodo corre las condiciones actualizables de la colicione entre el pajaro y las tuberias
+	 */
 	public void run() {
 		while(true) {
 			while(!terminar) {
@@ -80,7 +100,9 @@ public class Colisionador extends Thread{
 			} catch (InterruptedException e) {	}
 		}
 	}
-	
+	/**
+	 * Inicia la inhabilitacion del colisionador
+	 */
 	public void resumeThread() {
 		terminar = false;
 	}

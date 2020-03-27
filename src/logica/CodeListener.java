@@ -5,7 +5,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import interfazGrafica.EscenarioJuego;
-
+/**
+ * 
+ * @author Julian Espinoza
+ *
+ */
 public class CodeListener extends Thread implements KeyListener{
 	//Attributes
 	private String codigo;
