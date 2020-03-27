@@ -89,7 +89,6 @@ public class Pajaro extends Thread implements KeyListener {
 					}
 					
 					if(alturaDePaso - this.pajarito.getY() == 0) {
-						System.out.println("pasa 0");
 						juego.bird.setIcon(new ImageIcon(juego.imagenBird0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW()-10, Image.SCALE_SMOOTH)));
 					}
 					if(this.pajarito.getY()- alturaDePaso  >= 10 & this.pajarito.getY()- alturaDePaso < 30) {
