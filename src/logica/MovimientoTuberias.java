@@ -5,7 +5,12 @@ import javax.swing.JLabel;
 import interfazGrafica.EscenarioJuego;
 
 
-
+/**
+ * Declaración de clase Movimiento Tuverias
+ * @author Santiago Herrera
+ * @version
+ *
+ */
 public class MovimientoTuberias extends Thread {
 
 	//Attributes
@@ -14,7 +19,14 @@ public class MovimientoTuberias extends Thread {
 	private int reubicacionTubos1 = 0,reubicacionTubos2 = -300;
 	private boolean terminar;
 	
-	
+	/**
+	 * Constructor de MovimientoTuberias
+	 * @param tuberiaAlta1
+	 * @param tuberiaBaja1
+	 * @param tuberiaAlta2
+	 * @param tuberiaBaja2
+	 * @param juego
+	 */
 	public MovimientoTuberias(JLabel tuberiaAlta1,JLabel tuberiaBaja1,JLabel tuberiaAlta2,JLabel tuberiaBaja2,EscenarioJuego juego) {
 		this.tuberiaAlta1 = tuberiaAlta1;
 		this.tuberiaBaja1 = tuberiaBaja1;
@@ -23,7 +35,9 @@ public class MovimientoTuberias extends Thread {
 		this.juego = juego;
 		this.terminar = false;
 	}
-	
+	/**
+	 * Método corre el movimiento de las tuberias
+	 */
 	public void run() {
 		while(true) {
 			while(!terminar) {
@@ -72,11 +86,15 @@ public class MovimientoTuberias extends Thread {
 			}
 		}
 	}
-	
+	/**
+	 * Inicia la inhabilitacion del movimiento de las tuberias
+	 */
 	public void pauseThread() {
 		this.terminar = true;
 	}
-	
+	/**
+	 * Inicia la habilitacion del movimiento de las tuberias
+	 */
 	public void resumeThread() {
 		reubicacionTubos1 = 0;
 		reubicacionTubos2 = -300;

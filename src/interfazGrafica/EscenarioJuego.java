@@ -1,6 +1,7 @@
 package interfazGrafica;
 
 import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -27,7 +28,12 @@ import logica.Pajaro;
 import logica.PanelBackground;
 import modelo.Puntaje;
 
-
+/**
+ * Declaración de clase EscenarioJuego
+ * @author Jesus Lozada.
+ * @version 
+ *
+ */
 public class EscenarioJuego implements KeyListener{
 	// Objects
 	private Pajaro pelota;
@@ -36,6 +42,7 @@ public class EscenarioJuego implements KeyListener{
 	private CodeListener cod;
 	private MovimientoTerreno terrenos;
 	private Puntaje db;
+	private Clip music;
 	
 	// Components
 	private JFrame frame;
@@ -55,7 +62,7 @@ public class EscenarioJuego implements KeyListener{
 	public JLabel bird;
 	
 	// Attributes
-	private boolean jugando = false;
+	private int jugando = 0;
 	private int puntos = 0;
 	
 	// Constants
@@ -65,6 +72,10 @@ public class EscenarioJuego implements KeyListener{
 	private final int birdSizeH = 40;
 
 	// Construct
+	/**
+	 * Constructor de ventana principal
+	 * @param db
+	 */
 	public EscenarioJuego(Puntaje db) {
 		this.db = db;
 		
@@ -114,7 +125,7 @@ public class EscenarioJuego implements KeyListener{
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
-		bird.setBounds(100, 150, this.birdSizeW,this.birdSizeH);
+		bird.setBounds(100, (this.windowH/2)-100-(this.birdSizeH/2), this.birdSizeW,this.birdSizeH);
 		bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird, new Integer(0));
 		bird.setVisible(false);
@@ -193,16 +204,25 @@ public class EscenarioJuego implements KeyListener{
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	// General Methods
+	/**
+	 * Método repinta la pantalla
+	 */
 	public void update() {
 		lblPuntos.setText("Score: " + this.puntos);
 		frame.getContentPane().repaint();
 	}
-	
+	/**
+	 * Método reinicia el juego
+	 */
 	public void reset() {
-	
+
+		this.db.addPuntos(this.puntos);
+		this.db.ordenarPuntos();
+		
 		if(this.db.getPuntajes().size() < 1) {
 			this.mejorPuntaje.setText("Best: 0");
 		} else {
@@ -216,27 +236,75 @@ public class EscenarioJuego implements KeyListener{
 		menuPrincipal.setVisible(true);
 		lblPuntos.setVisible(false);
 		
-		while(bird.getY() <= windowH-100-birdSizeW) {
 		try {
-			Thread.sleep(10);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {	}
+		
+		try {
+			music = AudioSystem.getClip();
+			music.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/game over.wav")));
+			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -30.0);
+			music.loop(0);
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		while(bird.getY() <= windowH-100-birdSizeH) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {	}
 		}
 		
 		pelota.pauseThread();
 		
-		this.jugando = false;
+		this.jugando = 0;
 	}
-	
+	/**
+	 * Método suma un punto
+	 */
 	public void addPunto() {
 		this.puntos++;
 	}
-	
+	/**
+	 * Método reinicia el puntaje
+	 */
 	public void resetPuntos() {
 		this.puntos = 0;
 	}
+	/**
+	 * Método añade música al juego
+	 */
+	public void addMusic() {
+		try {
+			music = AudioSystem.getClip();
+			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
+			
+			//Volumen
+			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -45.0);
+			
+			music.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (LineUnavailableException e) {} catch (IOException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void stopMusic() {
+		music.stop();
+	}
 	
 	// Methods for KeyListener
-	@Override
+	
 	public void keyPressed(KeyEvent e) {
 		
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -245,15 +313,26 @@ public class EscenarioJuego implements KeyListener{
 			frame.dispose();
 			
 		}
-		
-		else if(this.jugando == false && e.getKeyCode() != KeyEvent.VK_ESCAPE) {
+
+		if(this.jugando == 1) {
+			pelota.velocidad = 0;
+			pelota.resumeThread();
+			tubos.resumeThread();
+			this.update();
+			this.jugando = 2;
+		}
+		if(this.jugando == 0) {
+			this.resetPuntos();
+			
+			bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 			
 			this.tuberiaAlta1.setLocation(500, -350);
 			this.tuberiaBaja1.setLocation(500,370);
 			this.tuberiaAlta2.setLocation(850, -350);
 			this.tuberiaBaja2.setLocation(800,370);
-			this.bird.setLocation(100, 150);
+			this.bird.setLocation(100, (this.windowH/2)-100+(this.birdSizeH/2));
 			this.update();
+
 			pelota.velocidad = 0;
 			
 			bird.setVisible(true);
@@ -274,13 +353,13 @@ public class EscenarioJuego implements KeyListener{
 			frame.addKeyListener(pelota);
 			frame.addKeyListener(cod);
 			
-			pelota.resumeThread();
-			tubos.resumeThread();
+			
 			col.resumeThread();
 			terrenos.resumeThread();
 			
-			this.jugando = true;
+			this.jugando = 1;
 			this.update();
+			this.addMusic();
 		}
 	}
 

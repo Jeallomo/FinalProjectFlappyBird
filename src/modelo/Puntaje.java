@@ -10,6 +10,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Declaración de clase Puntaje
+ * @author Santiago Herrera
+ * @version
+ *
+ */
 public class Puntaje implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -17,7 +23,9 @@ public class Puntaje implements Serializable{
 	private ArrayList<Integer> puntajes = new ArrayList<Integer>();
 	
 	//Constructs
-	@SuppressWarnings("unchecked")
+	/**
+	 * Constructor Puntaje
+	 */
 	public Puntaje(){		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("puntos.txt"));
@@ -42,6 +50,10 @@ public class Puntaje implements Serializable{
 	}
 	
 	//Methods
+	/**
+	 * 
+	 * @param puntos
+	 */
 	public void addPuntos(int puntos) {
 		File file = new File("puntos.txt");
 		
@@ -59,7 +71,9 @@ public class Puntaje implements Serializable{
 		catch (FileNotFoundException fnfe) {} 
 		catch (IOException ioe) {}
 	}
-	
+	/**
+	 * 
+	 */
 	public void ordenarPuntos() {
 		int i;
 		int j;
