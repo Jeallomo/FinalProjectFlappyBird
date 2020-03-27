@@ -13,6 +13,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -39,14 +40,13 @@ public class EscenarioJuego implements KeyListener{
 	// Components
 	private JFrame frame;
 	private JLabel mejorPuntaje;
-	private JLabel mensajeTitulo;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	private JLabel terreno1, terreno2;
 	private JLabel lblPuntos;
 	private PanelBackground fondo;
 	private PanelBackground suelo;
+	private PanelMenuPrincipal menuPrincipal;
 	private JLayeredPane campoJuego;
-	private PanelBackground titulo;
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
 	private ImageIcon terreno;
@@ -70,6 +70,9 @@ public class EscenarioJuego implements KeyListener{
 		
 		frame = new JFrame("Flappy Bird");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(windowW,windowH);
+		frame.setLocationRelativeTo(null);
+		frame.setUndecorated(true);
 		
 		imagenBird0 = new ImageIcon(getClass().getResource("/Imagenes/bird.png"));
 		imagenBirdArriba = new ImageIcon(getClass().getResource("/Imagenes/bird20.png"));
@@ -82,23 +85,14 @@ public class EscenarioJuego implements KeyListener{
 		campoJuego.setPreferredSize(new Dimension(this.windowW,this.windowH));
 		campoJuego.setLayout(null);
 		
+		//Principal menu
 		fondo = new PanelBackground("/Imagenes/fondo.png");
 		fondo.setBounds(0, 0,this.windowW, this.windowH-95);
 		campoJuego.add(fondo, new Integer(-1));
 		
-		suelo = new PanelBackground("/Imagenes/suelo.png");
-		suelo.setBounds(0, this.windowH-100,this.windowW, 100);
-		campoJuego.add(suelo, new Integer(1));
-		
-		titulo = new PanelBackground("/Imagenes/fondoTitulo.png");
-		titulo.setBounds((this.windowW-((this.windowW*3)/4))/2, 150, (this.windowW*3)/4, 200);
-		titulo.setLayout(null);
-		campoJuego.add(titulo, new Integer(3));
-		
-		mensajeTitulo = new JLabel("Presiona una tecla para jugar");
-		mensajeTitulo.setBounds(0, (200/2), (this.windowW*3)/4, 30);
-		mensajeTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		titulo.add(mensajeTitulo);
+		menuPrincipal = new PanelMenuPrincipal(this);
+		menuPrincipal.setLocation(0,100);
+		campoJuego.add(menuPrincipal);
 		
 		mejorPuntaje = new JLabel();
 		if(this.db.getPuntajes().size() < 1) {
@@ -106,10 +100,14 @@ public class EscenarioJuego implements KeyListener{
 		} else {
 			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 		}
-		mejorPuntaje.setBounds(0, 40, (this.windowW*3)/4, 30);
 		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
-		mejorPuntaje.setFont(new Font(mejorPuntaje.getFont().getFontName(), mejorPuntaje.getFont().getStyle(), 40));
-		titulo.add(mejorPuntaje);
+		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 100));
+		menuPrincipal.getPaneles()[1].add(mejorPuntaje);
+		
+		//Game
+		suelo = new PanelBackground("/Imagenes/suelo.png");
+		suelo.setBounds(0, this.windowH-100,this.windowW, 100);
+		campoJuego.add(suelo, new Integer(1));
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
@@ -119,6 +117,7 @@ public class EscenarioJuego implements KeyListener{
 		bird.setBounds(100, 150, this.birdSizeW,this.birdSizeH);
 		bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird, new Integer(0));
+		bird.setVisible(false);
 		
 		tuberiaAlta1 = new JLabel();
 		tuberiaAlta1.setBounds(500, -350, 100, 600);
@@ -153,6 +152,7 @@ public class EscenarioJuego implements KeyListener{
 		lblPuntos = new JLabel("Score: " + this.puntos);
 		lblPuntos.setBounds(15, 10, this.windowW, 20);
 		campoJuego.add(lblPuntos, new Integer(2));
+		lblPuntos.setVisible(false);
 		
 		pelota = new Pajaro(bird, this);
 		tubos = new MovimientoTuberias(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
@@ -185,7 +185,7 @@ public class EscenarioJuego implements KeyListener{
 			
 			//Volumen
 			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
-			volumen.setValue((float) -37.0);
+			volumen.setValue((float) -45);
 			
 			music.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (LineUnavailableException e) {} catch (IOException e) {
@@ -203,12 +203,18 @@ public class EscenarioJuego implements KeyListener{
 	
 	public void reset() {
 	
+		if(this.db.getPuntajes().size() < 1) {
+			this.mejorPuntaje.setText("Best: 0");
+		} else {
+			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		}
 		
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
 		tubos.pauseThread();
 		terrenos.pauseThread();
-		campoJuego.add(titulo, new Integer(3));
+		menuPrincipal.setVisible(true);
+		lblPuntos.setVisible(false);
 		
 		while(bird.getY() <= windowH-100-birdSizeW) {
 		try {
@@ -232,7 +238,15 @@ public class EscenarioJuego implements KeyListener{
 	// Methods for KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(this.jugando == false) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			
+			frame.setVisible(false);
+			frame.dispose();
+			
+		}
+		
+		else if(this.jugando == false && e.getKeyCode() != KeyEvent.VK_ESCAPE) {
 			
 			this.tuberiaAlta1.setLocation(500, -350);
 			this.tuberiaBaja1.setLocation(500,370);
@@ -241,6 +255,10 @@ public class EscenarioJuego implements KeyListener{
 			this.bird.setLocation(100, 150);
 			this.update();
 			pelota.velocidad = 0;
+			
+			bird.setVisible(true);
+			menuPrincipal.setVisible(false);
+			lblPuntos.setVisible(true);
 			
 			this.db.addPuntos(this.puntos);
 			this.db.ordenarPuntos();
@@ -253,7 +271,6 @@ public class EscenarioJuego implements KeyListener{
 				this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 			}
 			
-			campoJuego.remove(titulo);
 			frame.addKeyListener(pelota);
 			frame.addKeyListener(cod);
 			
