@@ -56,7 +56,7 @@ public class EscenarioJuego implements KeyListener{
 	public JLabel bird;
 	
 	// Attributes
-	private boolean jugando = false;
+	private int jugando = 0;
 	private int puntos = 0;
 	
 	// Constants
@@ -117,7 +117,7 @@ public class EscenarioJuego implements KeyListener{
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
-		bird.setBounds(100, 150, this.birdSizeW,this.birdSizeH);
+		bird.setBounds(100, (this.windowH/2)-100-(this.birdSizeH/2), this.birdSizeW,this.birdSizeH);
 		bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 		campoJuego.add(bird, new Integer(0));
 		
@@ -188,6 +188,15 @@ public class EscenarioJuego implements KeyListener{
 	}
 	
 	public void reset() {
+		this.db.addPuntos(this.puntos);
+		this.db.ordenarPuntos();
+		
+		if(this.db.getPuntajes().size() < 1) {
+			this.mejorPuntaje.setText("Best: 0");
+		} else {
+			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
+		}
+		
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
 		tubos.pauseThread();
@@ -223,7 +232,7 @@ public class EscenarioJuego implements KeyListener{
 		
 		pelota.pauseThread();
 		
-		this.jugando = false;
+		this.jugando = 0;
 	}
 	
 	public void addPunto() {
@@ -258,37 +267,34 @@ public class EscenarioJuego implements KeyListener{
 	// Methods for KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(this.jugando == false) {
+		if(this.jugando == 1) {
+			pelota.velocidad = 0;
+			pelota.resumeThread();
+			tubos.resumeThread();
+			this.update();
+			this.jugando = 2;
+		}
+		if(this.jugando == 0) {
+			this.resetPuntos();
+			
+			bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 			
 			this.tuberiaAlta1.setLocation(500, -350);
 			this.tuberiaBaja1.setLocation(500,370);
 			this.tuberiaAlta2.setLocation(850, -350);
 			this.tuberiaBaja2.setLocation(800,370);
-			this.bird.setLocation(100, 150);
+			this.bird.setLocation(100, (this.windowH/2)-100+(this.birdSizeH/2));
 			this.update();
-			pelota.velocidad = 0;
-			
-			this.db.addPuntos(this.puntos);
-			this.db.ordenarPuntos();
-			
-			this.resetPuntos();
-			
-			if(this.db.getPuntajes().size() < 1) {
-				this.mejorPuntaje.setText("Best: 0");
-			} else {
-				this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
-			}
 			
 			campoJuego.remove(titulo);
 			frame.addKeyListener(pelota);
 			frame.addKeyListener(cod);
 			
-			pelota.resumeThread();
-			tubos.resumeThread();
+			
 			col.resumeThread();
 			terrenos.resumeThread();
 			
-			this.jugando = true;
+			this.jugando = 1;
 			this.update();
 			this.addMusic();
 		}
