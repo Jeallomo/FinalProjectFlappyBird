@@ -311,6 +311,7 @@ public class EscenarioJuego implements KeyListener{
 			
 			frame.setVisible(false);
 			frame.dispose();
+			System.exit(0);
 			
 		}
 
