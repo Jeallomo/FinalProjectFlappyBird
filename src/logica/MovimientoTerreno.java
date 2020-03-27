@@ -4,6 +4,12 @@ import javax.swing.JLabel;
 
 import interfazGrafica.EscenarioJuego;
 
+/**
+ * Declaración de clase MovimientoTerreno
+ * @author Jesus Lozada
+ * @version 
+ *
+ */
 public class MovimientoTerreno extends Thread {
 	//Attributes
 	private JLabel terreno1;
@@ -13,14 +19,21 @@ public class MovimientoTerreno extends Thread {
 	private int reubicacionTerreno2 = 0;
 	private boolean terminar;
 	
-	
+	/**
+	 * Cronstructor Movimiento terreno
+	 * @param terreno1
+	 * @param terreno2
+	 * @param juego
+	 */
 	public MovimientoTerreno(JLabel terreno1,JLabel terreno2, EscenarioJuego juego) {
 		this.terreno1 = terreno1;
 		this.terreno2 = terreno2;
 		this.juego = juego;
 		this.terminar = false;
 	}
-	
+	/**
+	 * Método corre el movimiento del terreno base
+	 */
 	public void run() {
 		while(true) {
 			while(!terminar) {
@@ -52,11 +65,15 @@ public class MovimientoTerreno extends Thread {
 			}
 		}
 	}
-	
+	/**
+	 * Inicia la inhabilitacion del movimiento del terreno base
+	 */
 	public void pauseThread() {
 		this.terminar = true;
 	}
-	
+	/**
+	 * Inicia la habilitacion del movimiento del terreno base
+	 */
 	public void resumeThread() {
 		reubicacionTerreno1 = -500;
 		reubicacionTerreno2 = 0;
