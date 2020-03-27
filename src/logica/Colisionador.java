@@ -52,7 +52,7 @@ public class Colisionador extends Thread{
 						clip = AudioSystem.getClip();
 						clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/hit.wav")));
 						FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-						volumen.setValue((float) -30.0);
+						volumen.setValue((float) -20.0);
 						clip.loop(0);
 					} catch (LineUnavailableException e1) {
 						// TODO Auto-generated catch block
@@ -64,6 +64,8 @@ public class Colisionador extends Thread{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+					this.ej.stopMusic();
 					
 					this.ej.reset();
 					

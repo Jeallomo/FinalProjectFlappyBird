@@ -35,6 +35,7 @@ public class EscenarioJuego implements KeyListener{
 	private CodeListener cod;
 	private MovimientoTerreno terrenos;
 	private Puntaje db;
+	private Clip music;
 	
 	// Components
 	private JFrame frame;
@@ -177,22 +178,7 @@ public class EscenarioJuego implements KeyListener{
 		frame.setResizable(false);
 		
 		this.update();
-		
-		//Audio
-		try {
-			Clip music = AudioSystem.getClip();
-			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
-			
-			//Volumen
-			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
-			volumen.setValue((float) -37.0);
-			
-			music.loop(Clip.LOOP_CONTINUOUSLY);
-		} catch (LineUnavailableException e) {} catch (IOException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		}
+		//this.addMusic();
 	}
 	
 	// General Methods
@@ -202,18 +188,37 @@ public class EscenarioJuego implements KeyListener{
 	}
 	
 	public void reset() {
-	
-		
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
 		tubos.pauseThread();
 		terrenos.pauseThread();
 		campoJuego.add(titulo, new Integer(3));
 		
-		while(bird.getY() <= windowH-100-birdSizeW) {
 		try {
-			Thread.sleep(10);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {	}
+		
+		try {
+			music = AudioSystem.getClip();
+			music.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/game over.wav")));
+			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -30.0);
+			music.loop(0);
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		while(bird.getY() <= windowH-100-birdSizeH) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {	}
 		}
 		
 		pelota.pauseThread();
@@ -227,6 +232,27 @@ public class EscenarioJuego implements KeyListener{
 	
 	public void resetPuntos() {
 		this.puntos = 0;
+	}
+	
+	public void addMusic() {
+		try {
+			music = AudioSystem.getClip();
+			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
+			
+			//Volumen
+			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
+			volumen.setValue((float) -45.0);
+			
+			music.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (LineUnavailableException e) {} catch (IOException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void stopMusic() {
+		music.stop();
 	}
 	
 	// Methods for KeyListener
@@ -264,6 +290,7 @@ public class EscenarioJuego implements KeyListener{
 			
 			this.jugando = true;
 			this.update();
+			this.addMusic();
 		}
 	}
 

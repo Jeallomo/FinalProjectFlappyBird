@@ -65,7 +65,14 @@ public class Pajaro extends Thread implements KeyListener {
 						}
 					}
 					delay = false;
-					this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (velocidad/10 * this.ejeDireccion));
+					
+					if(this.pajarito.getY() + (velocidad/10 * this.ejeDireccion) <= -150){
+						this.pajarito.setLocation(this.pajarito.getX(), -150);
+					} else if(this.pajarito.getY() + (velocidad/10 * this.ejeDireccion) >= this.juego.getWindowH()-99-this.juego.getBirdSizeH()){
+						this.pajarito.setLocation(this.pajarito.getX(), this.juego.getWindowH()-99-this.juego.getBirdSizeH());
+					} else {
+						this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (velocidad/10 * this.ejeDireccion));
+					}
 					
 					if(alturaDePaso - this.pajarito.getY() == 0) {
 						System.out.println("pasa 0");
@@ -83,8 +90,6 @@ public class Pajaro extends Thread implements KeyListener {
 					if( this.pajarito.getY() - alturaDePaso >=   70) {
 						juego.bird.setIcon(new ImageIcon(juego.imagenBird90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
 					}
-				
-					System.out.println(this.pajarito.getY() - alturaDePaso);
 					
 					try {
 						Thread.sleep(6);
