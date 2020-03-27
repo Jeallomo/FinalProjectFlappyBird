@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import interfazGrafica.EscenarioJuego;
 
 /**
- * Declaración de clase Pajaro
+ * Declaraciï¿½n de clase Pajaro
  * @author Julian Espinoza
  * @version
  *
@@ -64,7 +64,7 @@ public class Pajaro extends Thread implements KeyListener {
 
 	// Method for Thread
 	/**
-	 * Método corre el movimiento del pajaro
+	 * Mï¿½todo corre el movimiento del pajaro
 	 */
 	public void run() {
 		 while(true) {
@@ -88,20 +88,22 @@ public class Pajaro extends Thread implements KeyListener {
 						this.pajarito.setLocation(this.pajarito.getX(), this.pajarito.getY() + (velocidad/10 * this.ejeDireccion));
 					}
 					
-					if(alturaDePaso - this.pajarito.getY() == 0) {
-						juego.bird.setIcon(new ImageIcon(juego.imagenBird0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW()-10, Image.SCALE_SMOOTH)));
-					}
-					if(this.pajarito.getY()- alturaDePaso  >= 10 & this.pajarito.getY()- alturaDePaso < 30) {
-						juego.bird.setIcon(new ImageIcon(juego.imagenBird20.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
-					}
-					if(this.pajarito.getY() - alturaDePaso >= 30 & this.pajarito.getY() - alturaDePaso < 50) {
-						juego.bird.setIcon(new ImageIcon(juego.imagenBird45.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
-					}
-					if(this.pajarito.getY() - alturaDePaso >= 50 & this.pajarito.getY() - alturaDePaso < 70) {
-						juego.bird.setIcon(new ImageIcon(juego.imagenBird75.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
-					}
-					if( this.pajarito.getY() - alturaDePaso >=   70) {
-						juego.bird.setIcon(new ImageIcon(juego.imagenBird90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+					if(this.juego.getActivePJ() == "bird/bird") {
+						if(alturaDePaso - this.pajarito.getY() == 0) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenBird0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW()-10, Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY()- alturaDePaso  >= 10 & this.pajarito.getY()- alturaDePaso < 30) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenBird20.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY() - alturaDePaso >= 30 & this.pajarito.getY() - alturaDePaso < 50) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenBird45.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY() - alturaDePaso >= 50 & this.pajarito.getY() - alturaDePaso < 70) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenBird75.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if( this.pajarito.getY() - alturaDePaso >=   70) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenBird90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
 					}
 					
 					try {
@@ -155,14 +157,23 @@ public class Pajaro extends Thread implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		this.ejeDireccion = -1;
 		this.StaticY = this.pajarito.getY();
-		juego.bird.setIcon(new ImageIcon(juego.imagenBirdArriba.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+		if(this.juego.getActivePJ() == "bird/bird") {
+			juego.bird.setIcon(new ImageIcon(juego.imagenBirdArriba.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));	
+		}
+
 		delay = true;
 		alturaDePaso = this.StaticY;
 		velocidad = 0;
 
 		try {
 			clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/jump.wav")));
+			if(this.juego.getActivePJ() == "bird/bird") {
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/jump.wav")));
+			}
+			if(this.juego.getActivePJ() == "porky/porky") {
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/oink.wav")));
+			}
+			
 			FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			volumen.setValue((float) -30.0);
 			clip.loop(0);
