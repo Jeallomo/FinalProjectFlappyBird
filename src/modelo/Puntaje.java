@@ -13,7 +13,6 @@ import java.util.ArrayList;
 /**
  * Declaración de clase Puntaje
  * @author Santiago Herrera
- * @version
  *
  */
 public class Puntaje implements Serializable{
