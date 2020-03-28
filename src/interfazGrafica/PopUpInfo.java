@@ -71,11 +71,19 @@ public class PopUpInfo extends JFrame {
 		add(opcsVentana,BorderLayout.NORTH);
 		opcsVentana.setVisible(true);
 		
+		JLabel imagenManual = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		
+		JLabel imagenCodes = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		
 		manualDeUsuario = new JPanel();
 		manualDeUsuario.setVisible(true);
+		manualDeUsuario.add(imagenManual);
+		imagenManual.setVisible(true);
 		
 		listaCodes = new JPanel();
 		listaCodes.setVisible(true);
+		listaCodes.add(imagenCodes);
+		imagenCodes.setVisible(true);
 		
 		JTabbedPane pane = new JTabbedPane();
 		pane.setBackground(Color.GREEN.brighter());

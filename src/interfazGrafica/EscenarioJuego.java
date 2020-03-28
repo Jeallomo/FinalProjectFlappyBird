@@ -68,7 +68,6 @@ public class EscenarioJuego implements KeyListener{
 	// Attributes
 	private int jugando = 0;
 	private int puntos = 0;
-	@SuppressWarnings("unused")
 	private int puntosActual;
 	private String activePJ = "bird/bird";
 	
@@ -121,13 +120,8 @@ public class EscenarioJuego implements KeyListener{
 		info.setVisible(false);
 		
 		menuPrincipal = new PanelMenuPrincipal(this);
-		menuPrincipal.setLocation(0,120);
+		menuPrincipal.setLocation(50,120);
 		campoJuego.add(menuPrincipal);
-		
-		puntajeActual = new JLabel();
-		puntajeActual.setFont(new Font("Agency FB", puntajeActual.getFont().getStyle(), 40));
-		puntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
-		menuPrincipal.getPaneles()[1].add(puntajeActual);
 		
 		mejorPuntaje = new JLabel();
 		if(this.db.getPuntajes().size() < 1) {
@@ -136,8 +130,13 @@ public class EscenarioJuego implements KeyListener{
 			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 		}
 		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
-		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 40));
+		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 70));
 		menuPrincipal.getPaneles()[1].add(mejorPuntaje);
+		
+		puntajeActual = new JLabel();
+		puntajeActual.setFont(new Font("Agency FB", puntajeActual.getFont().getStyle(), 30));
+		puntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
+		menuPrincipal.getPaneles()[1].add(puntajeActual);
 		
 		//Game
 		suelo = new PanelBackground("/Imagenes/suelo.png");
