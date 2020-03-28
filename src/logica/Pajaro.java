@@ -16,12 +16,12 @@ import javax.swing.JLabel;
 import interfazGrafica.EscenarioJuego;
 
 /**
- * Declaración de clase Pajaro
+ * Declaraciï¿½n de clase Pajaro
  * @author Julian Espinoza
  * @version
  *
  */
-public class Pajaro extends Thread implements KeyListener {
+public class Pajaro extends Hilo implements KeyListener {
 
 	// Objects
 	private JLabel pajarito;
@@ -64,7 +64,7 @@ public class Pajaro extends Thread implements KeyListener {
 
 	// Method for Thread
 	/**
-	 * Método corre el movimiento del pajaro
+	 * Mï¿½todo corre el movimiento del pajaro
 	 */
 	public void run() {
 		 while(true) {
