@@ -26,7 +26,7 @@ public class PanelMenuPrincipal extends JPanel {
 	public PanelMenuPrincipal(EscenarioJuego ej) {
 
 		setLayout(new GridLayout(3, 1));
-		setSize(500, 400);
+		setSize(400, 350);
 		setOpaque(false);
 
 		titulo = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
@@ -36,7 +36,7 @@ public class PanelMenuPrincipal extends JPanel {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 				AlphaComposite old = (AlphaComposite) g2.getComposite();
-				g2.setComposite(AlphaComposite.SrcOver.derive(0.5f));
+				g2.setComposite(AlphaComposite.SrcOver.derive(0.7f));
 				super.paintComponent(g);
 				g2.setComposite(old);
 			}
@@ -50,7 +50,7 @@ public class PanelMenuPrincipal extends JPanel {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 				AlphaComposite old = (AlphaComposite) g2.getComposite();
-				g2.setComposite(AlphaComposite.SrcOver.derive(0.5f));
+				g2.setComposite(AlphaComposite.SrcOver.derive(0.7f));
 				super.paintComponent(g);
 				g2.setComposite(old);
 			}
@@ -58,27 +58,22 @@ public class PanelMenuPrincipal extends JPanel {
 		paneles[1].setBackground(Color.WHITE);
 		add(paneles[1]);
 
-		JLabel aux = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto1.png")));
+		JLabel aux = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto.png")));
 		aux.setVisible(true);
-
-		JLabel aux1 = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto2.png")));
-		aux1.setVisible(true);
 
 		paneles[2] = new JPanel(){
 			protected void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 				AlphaComposite old = (AlphaComposite) g2.getComposite();
-				g2.setComposite(AlphaComposite.SrcOver.derive(0.5f));
+				g2.setComposite(AlphaComposite.SrcOver.derive(0.7f));
 				super.paintComponent(g);
 				g2.setComposite(old);
 			}
 		};
 		paneles[2].setBackground(Color.WHITE);
-		paneles[2].setLayout(new GridLayout(2, 1));
-		paneles[2].setSize(500, 50);
+		paneles[2].setSize(500, 70);
 		paneles[2].add(aux);
-		paneles[2].add(aux1);
 		add(paneles[2]);
 
 		// Do visible

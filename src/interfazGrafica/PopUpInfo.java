@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 
-@SuppressWarnings("serial")
+/**
+ * Declaración clase  PopUpInfo
+ * @author JulianEspinoza
+ *
+ */
 public class PopUpInfo extends JFrame {
 
 	// Components
@@ -30,6 +34,10 @@ public class PopUpInfo extends JFrame {
 	private final int windowH = 300;
 	
 	// Construct
+	/**
+	 * Constructor PopUpInfo
+	 * @param ej
+	 */
 	public PopUpInfo(EscenarioJuego ej) {
 		
 		super();
@@ -71,11 +79,19 @@ public class PopUpInfo extends JFrame {
 		add(opcsVentana,BorderLayout.NORTH);
 		opcsVentana.setVisible(true);
 		
+		JLabel imagenManual = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		
+		JLabel imagenCodes = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		
 		manualDeUsuario = new JPanel();
 		manualDeUsuario.setVisible(true);
+		manualDeUsuario.add(imagenManual);
+		imagenManual.setVisible(true);
 		
 		listaCodes = new JPanel();
 		listaCodes.setVisible(true);
+		listaCodes.add(imagenCodes);
+		imagenCodes.setVisible(true);
 		
 		JTabbedPane pane = new JTabbedPane();
 		pane.setBackground(Color.GREEN.brighter());
