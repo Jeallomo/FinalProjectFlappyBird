@@ -18,7 +18,6 @@ import interfazGrafica.EscenarioJuego;
 /**
  * Declaración de clase Pajaro
  * @author Julian Espinoza
- * @version
  *
  */
 public class Pajaro extends Hilo implements KeyListener {
