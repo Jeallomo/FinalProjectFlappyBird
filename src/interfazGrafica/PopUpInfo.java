@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 
-@SuppressWarnings("serial")
+/**
+ * Declaración clase  PopUpInfo
+ * @author JulianEspinoza
+ *
+ */
 public class PopUpInfo extends JFrame {
 
 	// Components
@@ -30,6 +34,10 @@ public class PopUpInfo extends JFrame {
 	private final int windowH = 300;
 	
 	// Construct
+	/**
+	 * Constructor PopUpInfo
+	 * @param ej
+	 */
 	public PopUpInfo(EscenarioJuego ej) {
 		
 		super();
