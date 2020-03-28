@@ -12,8 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-@SuppressWarnings("serial")
+/**
+ * 
+ * @author Julian Espinoza
+ *
+ */
 public class PanelMenuPrincipal extends JPanel {
 
 	// Components

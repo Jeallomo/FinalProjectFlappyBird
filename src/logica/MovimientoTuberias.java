@@ -8,7 +8,6 @@ import interfazGrafica.EscenarioJuego;
 /**
  * Declaración de clase Movimiento Tuverias
  * @author Santiago Herrera
- * @version
  *
  */
 public class MovimientoTuberias extends Hilo{

@@ -7,7 +7,6 @@ import interfazGrafica.EscenarioJuego;
 /**
  * Declaración de clase MovimientoTerreno
  * @author Jesus Lozada
- * @version 
  *
  */
 public class MovimientoTerreno extends Hilo {
