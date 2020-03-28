@@ -10,7 +10,7 @@ import interfazGrafica.EscenarioJuego;
  * @version 
  *
  */
-public class MovimientoTerreno extends Thread {
+public class MovimientoTerreno extends Hilo {
 	//Attributes
 	private JLabel terreno1;
 	private JLabel terreno2;

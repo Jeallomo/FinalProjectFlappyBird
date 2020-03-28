@@ -21,7 +21,7 @@ import interfazGrafica.EscenarioJuego;
  * @version
  *
  */
-public class Pajaro extends Thread implements KeyListener {
+public class Pajaro extends Hilo implements KeyListener {
 
 	// Objects
 	private JLabel pajarito;

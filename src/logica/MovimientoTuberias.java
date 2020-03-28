@@ -11,7 +11,7 @@ import interfazGrafica.EscenarioJuego;
  * @version
  *
  */
-public class MovimientoTuberias extends Thread {
+public class MovimientoTuberias extends Hilo{
 
 	//Attributes
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
