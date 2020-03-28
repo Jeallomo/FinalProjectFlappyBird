@@ -55,9 +55,12 @@ public class EscenarioJuego implements KeyListener{
 	private JLayeredPane campoJuego;
 	private ImageIcon imagenTuboAlto;
 	private ImageIcon imagenTuboBajo;
+	private ImageIcon imagenAsteroideAlto;
+	private ImageIcon imagenAsteroideBajo;
 	private ImageIcon terreno;
 	
 	public ImageIcon imagenBird0,imagenBirdArriba,imagenBird20,imagenBird45,imagenBird90,imagenBird75;
+	public ImageIcon imagenSpace0,imagenSpaceArriba,imagenSpace20,imagenSpace45,imagenSpace90,imagenSpace75;
 	public ImageIcon imagenPorky;
 	public JLabel bird;
 	
@@ -92,6 +95,14 @@ public class EscenarioJuego implements KeyListener{
 		imagenBird45 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -45.png"));
 		imagenBird75 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -75.png"));
 		imagenBird90 = new ImageIcon(getClass().getResource("/Imagenes/bird/bird -90.png"));
+		
+		imagenSpace0 = new ImageIcon(getClass().getResource("/Imagenes/space/space 0.png"));
+		imagenSpaceArriba = new ImageIcon(getClass().getResource("/Imagenes/space/space 20.png"));
+		imagenSpace20 = new ImageIcon(getClass().getResource("/Imagenes/space/space -20.png"));
+		imagenSpace45 = new ImageIcon(getClass().getResource("/Imagenes/space/space -45.png"));
+		imagenSpace75 = new ImageIcon(getClass().getResource("/Imagenes/space/space -75.png"));
+		imagenSpace90 = new ImageIcon(getClass().getResource("/Imagenes/space/space -90.png"));
+		
 		imagenPorky = new ImageIcon(getClass().getResource("/Imagenes/porky/porky.png"));
 		
 		campoJuego = new JLayeredPane();
@@ -124,6 +135,8 @@ public class EscenarioJuego implements KeyListener{
 		
 		imagenTuboAlto = new ImageIcon(getClass().getResource("/Imagenes/tuboArriba.png"));
 		imagenTuboBajo = new ImageIcon(getClass().getResource("/Imagenes/tuboAbajo.png"));
+		imagenAsteroideAlto = new ImageIcon(getClass().getResource("/Imagenes/asteroideArriba.png"));
+		imagenAsteroideBajo = new ImageIcon(getClass().getResource("/Imagenes/asteroideAbajo.png"));
 		terreno = new ImageIcon(getClass().getResource("/Imagenes/div.png"));
 		
 		bird = new JLabel();
@@ -134,12 +147,12 @@ public class EscenarioJuego implements KeyListener{
 		
 		tuberiaAlta1 = new JLabel();
 		tuberiaAlta1.setBounds(500, -350, 100, 600);
-		tuberiaAlta1.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+		tuberiaAlta1.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		campoJuego.add(tuberiaAlta1, new Integer(0));
 		
 		tuberiaBaja1 = new JLabel();
 		tuberiaBaja1.setBounds(500,370, 100, 600);
-		tuberiaBaja1.setIcon(new ImageIcon(imagenTuboAlto.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+		tuberiaBaja1.setIcon(new ImageIcon(imagenTuboBajo.getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
 		campoJuego.add(tuberiaBaja1, new Integer(0));
 		
 		tuberiaAlta2 = new JLabel();
@@ -168,7 +181,7 @@ public class EscenarioJuego implements KeyListener{
 		lblPuntos.setVisible(false);
 		
 		pelota = new Pajaro(bird, this);
-		tubos = new MovimientoTuberias(tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2,this);
+		tubos = new MovimientoTuberias(tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2,this);
 		col = new Colisionador(bird,tuberiaBaja1,tuberiaAlta1,tuberiaAlta2,tuberiaBaja2, this, terreno1, terreno2);
 		terrenos = new MovimientoTerreno(terreno1, terreno2, this);
 		cod = new CodeListener(this);
@@ -286,11 +299,15 @@ public class EscenarioJuego implements KeyListener{
 	public void addMusic() {
 		try {
 			music = AudioSystem.getClip();
-			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
+			if(this.activePJ != "space/space") {
+				music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
+			} else {
+				music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Interplanetary Odyssey.wav")));
+			}
 			
 			//Volumen
 			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
-			volumen.setValue((float) -45.0);
+			volumen.setValue((float) -35.0);
 			
 			music.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (LineUnavailableException e) {} catch (IOException e) {
@@ -328,6 +345,9 @@ public class EscenarioJuego implements KeyListener{
 			
 			if(this.activePJ == "bird/bird") {
 				bird.setIcon(new ImageIcon(imagenBird0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
+			}
+			if(this.activePJ == "space/space") {
+				bird.setIcon(new ImageIcon(imagenSpace0.getImage().getScaledInstance(this.birdSizeH, this.birdSizeW-10, Image.SCALE_SMOOTH)));
 			}
 			
 			this.tuberiaAlta1.setLocation(500, -350);
@@ -437,6 +457,37 @@ public class EscenarioJuego implements KeyListener{
 	public JLabel getLblPuntos() {
 		return lblPuntos;
 	}
-	
+
+	public JLabel getTuberiaAlta1() {
+		return tuberiaAlta1;
+	}
+
+	public JLabel getTuberiaBaja1() {
+		return tuberiaBaja1;
+	}
+
+	public JLabel getTuberiaAlta2() {
+		return tuberiaAlta2;
+	}
+
+	public JLabel getTuberiaBaja2() {
+		return tuberiaBaja2;
+	}
+
+	public ImageIcon getImagenAsteroideAlto() {
+		return imagenAsteroideAlto;
+	}
+
+	public ImageIcon getImagenAsteroideBajo() {
+		return imagenAsteroideBajo;
+	}
+
+	public ImageIcon getImagenTuboAlto() {
+		return imagenTuboAlto;
+	}
+
+	public ImageIcon getImagenTuboBajo() {
+		return imagenTuboBajo;
+	}	
 	
 }

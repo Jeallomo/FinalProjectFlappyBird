@@ -101,8 +101,26 @@ public class Pajaro extends Thread implements KeyListener {
 						if(this.pajarito.getY() - alturaDePaso >= 50 & this.pajarito.getY() - alturaDePaso < 70) {
 							juego.bird.setIcon(new ImageIcon(juego.imagenBird75.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
 						}
-						if( this.pajarito.getY() - alturaDePaso >=   70) {
+						if( this.pajarito.getY() - alturaDePaso >= 70) {
 							juego.bird.setIcon(new ImageIcon(juego.imagenBird90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+					}
+					
+					if(this.juego.getActivePJ() == "space/space") {
+						if(alturaDePaso - this.pajarito.getY() == 0) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenSpace0.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW()-10, Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY()- alturaDePaso  >= 10 & this.pajarito.getY()- alturaDePaso < 30) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenSpace20.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY() - alturaDePaso >= 30 & this.pajarito.getY() - alturaDePaso < 50) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenSpace45.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if(this.pajarito.getY() - alturaDePaso >= 50 & this.pajarito.getY() - alturaDePaso < 70) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenSpace75.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
+						}
+						if( this.pajarito.getY() - alturaDePaso >= 70) {
+							juego.bird.setIcon(new ImageIcon(juego.imagenSpace90.getImage().getScaledInstance(juego.getBirdSizeH()-5, juego.getBirdSizeW(), Image.SCALE_SMOOTH)));
 						}
 					}
 					
@@ -160,6 +178,9 @@ public class Pajaro extends Thread implements KeyListener {
 		if(this.juego.getActivePJ() == "bird/bird") {
 			juego.bird.setIcon(new ImageIcon(juego.imagenBirdArriba.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));	
 		}
+		if(this.juego.getActivePJ() == "space/space") {
+			juego.bird.setIcon(new ImageIcon(juego.imagenSpaceArriba.getImage().getScaledInstance(juego.getBirdSizeH(), juego.getBirdSizeW(), Image.SCALE_SMOOTH)));	
+		}
 
 		delay = true;
 		alturaDePaso = this.StaticY;
@@ -172,6 +193,9 @@ public class Pajaro extends Thread implements KeyListener {
 			}
 			if(this.juego.getActivePJ() == "porky/porky") {
 				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/oink.wav")));
+			}
+			if(this.juego.getActivePJ() == "space/space") {
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/spaceship.wav")));
 			}
 			
 			FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

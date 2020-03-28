@@ -27,6 +27,41 @@ public class CodeListener extends Thread implements KeyListener{
 	//Methods
 	public void run() {
 		while(true){
+			if(codigo.indexOf("space") != -1) {
+				if(this.ej.getActivePJ() == "space/space") {
+					this.ej.getCampoJuego().remove(this.ej.getFondo());
+					this.ej.setFondo(new PanelBackground("/Imagenes/fondo.png"));
+					this.ej.getFondo().setBounds(0, 0,this.ej.getWindowW(), this.ej.getWindowH()-95);
+					this.ej.getCampoJuego().add(this.ej.getFondo(), new Integer(-1));
+					this.ej.getLblPuntos().setForeground(Color.black);
+					this.ej.setActivePJ("bird/bird");
+					this.ej.stopMusic();
+					this.ej.addMusic();
+					
+					this.ej.getTuberiaAlta1().setIcon(new ImageIcon(this.ej.getImagenTuboAlto().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaAlta2().setIcon(new ImageIcon(this.ej.getImagenTuboAlto().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaBaja1().setIcon(new ImageIcon(this.ej.getImagenTuboBajo().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaBaja2().setIcon(new ImageIcon(this.ej.getImagenTuboBajo().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					
+				} else {
+					this.ej.getCampoJuego().remove(this.ej.getFondo());
+					this.ej.setFondo(new PanelBackground("/Imagenes/space.png"));
+					this.ej.getFondo().setBounds(0, 0,this.ej.getWindowW(), this.ej.getWindowH()-95);
+					this.ej.getCampoJuego().add(this.ej.getFondo(), new Integer(-1));
+					this.ej.getLblPuntos().setForeground(Color.white);
+					this.ej.setActivePJ("space/space");
+					this.ej.stopMusic();
+					this.ej.addMusic();
+					
+					this.ej.getTuberiaAlta1().setIcon(new ImageIcon(this.ej.getImagenAsteroideAlto().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaAlta2().setIcon(new ImageIcon(this.ej.getImagenAsteroideAlto().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaBaja1().setIcon(new ImageIcon(this.ej.getImagenAsteroideBajo().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+					this.ej.getTuberiaBaja2().setIcon(new ImageIcon(this.ej.getImagenAsteroideBajo().getImage().getScaledInstance(100, 600, Image.SCALE_SMOOTH)));
+				}
+				
+				this.codigo = "";
+				this.ej.update();
+			}
 			if(codigo.indexOf("night") != -1) {
 				this.ej.getCampoJuego().remove(this.ej.getFondo());
 				this.ej.setFondo(new PanelBackground("/Imagenes/fondoNoche.png"));
