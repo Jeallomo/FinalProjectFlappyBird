@@ -202,22 +202,6 @@ public class EscenarioJuego implements KeyListener{
 		frame.setResizable(false);
 		
 		this.update();
-
-		//Audio
-		try {
-			Clip music = AudioSystem.getClip();
-			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/Childs Nightmare.wav")));
-			
-			//Volumen
-			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
-			volumen.setValue((float) -45);
-			
-			music.loop(Clip.LOOP_CONTINUOUSLY);
-		} catch (LineUnavailableException e) {} catch (IOException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	// General Methods
