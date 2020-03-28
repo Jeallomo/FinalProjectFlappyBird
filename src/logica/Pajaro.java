@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import interfazGrafica.EscenarioJuego;
 
 /**
- * Declaraciï¿½n de clase Pajaro
+ * Declaración de clase Pajaro
  * @author Julian Espinoza
  * @version
  *
