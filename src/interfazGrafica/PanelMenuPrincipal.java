@@ -26,7 +26,7 @@ public class PanelMenuPrincipal extends JPanel {
 	public PanelMenuPrincipal(EscenarioJuego ej) {
 
 		setLayout(new GridLayout(3, 1));
-		setSize(500, 400);
+		setSize(500, 350);
 		setOpaque(false);
 
 		titulo = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
@@ -41,7 +41,7 @@ public class PanelMenuPrincipal extends JPanel {
 				g2.setComposite(old);
 			}
 		};
-		paneles[0].setBackground(Color.WHITE);
+		paneles[0].setBackground(Color.YELLOW);
 		paneles[0].add(titulo);
 		add(paneles[0]);
 
@@ -55,7 +55,7 @@ public class PanelMenuPrincipal extends JPanel {
 				g2.setComposite(old);
 			}
 		};
-		paneles[1].setBackground(Color.WHITE);
+		paneles[1].setBackground(Color.GREEN);
 		add(paneles[1]);
 
 		JLabel aux = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto1.png")));
@@ -63,6 +63,8 @@ public class PanelMenuPrincipal extends JPanel {
 
 		JLabel aux1 = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto2.png")));
 		aux1.setVisible(true);
+		
+		JLabel aux2 = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto3.png")));
 
 		paneles[2] = new JPanel(){
 			protected void paintComponent(Graphics g) {
@@ -74,10 +76,11 @@ public class PanelMenuPrincipal extends JPanel {
 				g2.setComposite(old);
 			}
 		};
-		paneles[2].setBackground(Color.WHITE);
-		paneles[2].setLayout(new GridLayout(2, 1));
-		paneles[2].setSize(500, 50);
+		paneles[2].setBackground(Color.GREEN.darker());
+		paneles[2].setLayout(new GridLayout(3, 1));
+		paneles[2].setSize(500, 70);
 		paneles[2].add(aux);
+		paneles[2].add(aux2);
 		paneles[2].add(aux1);
 		add(paneles[2]);
 

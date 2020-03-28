@@ -121,11 +121,11 @@ public class EscenarioJuego implements KeyListener{
 		info.setVisible(false);
 		
 		menuPrincipal = new PanelMenuPrincipal(this);
-		menuPrincipal.setLocation(0,100);
+		menuPrincipal.setLocation(0,120);
 		campoJuego.add(menuPrincipal);
 		
 		puntajeActual = new JLabel();
-		puntajeActual.setFont(new Font("Agency FB", puntajeActual.getFont().getStyle(), 50));
+		puntajeActual.setFont(new Font("Agency FB", puntajeActual.getFont().getStyle(), 40));
 		puntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
 		menuPrincipal.getPaneles()[1].add(puntajeActual);
 		
@@ -136,7 +136,7 @@ public class EscenarioJuego implements KeyListener{
 			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 		}
 		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
-		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 50));
+		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 40));
 		menuPrincipal.getPaneles()[1].add(mejorPuntaje);
 		
 		//Game
@@ -346,7 +346,7 @@ public class EscenarioJuego implements KeyListener{
 			
 		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_I) {
+		if(e.getKeyCode() == KeyEvent.VK_I && this.jugando == 0) {
 			
 			info.setVisible(true);
 			
