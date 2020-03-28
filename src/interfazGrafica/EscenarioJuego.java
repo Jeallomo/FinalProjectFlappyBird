@@ -45,6 +45,8 @@ public class EscenarioJuego implements KeyListener{
 	
 	// Components
 	private JFrame frame;
+	private PopUpInfo info;
+	private JLabel puntajeActual;
 	private JLabel mejorPuntaje;
 	private JLabel tuberiaAlta1,tuberiaBaja1,tuberiaAlta2,tuberiaBaja2;
 	private JLabel terreno1, terreno2;
@@ -67,6 +69,8 @@ public class EscenarioJuego implements KeyListener{
 	// Attributes
 	private int jugando = 0;
 	private int puntos = 0;
+	@SuppressWarnings("unused")
+	private int puntosActual;
 	private String activePJ = "bird/bird";
 	
 	// Constants
@@ -114,9 +118,17 @@ public class EscenarioJuego implements KeyListener{
 		fondo.setBounds(0, 0,this.windowW, this.windowH-95);
 		campoJuego.add(fondo, new Integer(-1));
 		
+		info = new PopUpInfo(this);
+		info.setVisible(false);
+		
 		menuPrincipal = new PanelMenuPrincipal(this);
 		menuPrincipal.setLocation(0,100);
 		campoJuego.add(menuPrincipal);
+		
+		puntajeActual = new JLabel();
+		puntajeActual.setFont(new Font("Agency FB", puntajeActual.getFont().getStyle(), 50));
+		puntajeActual.setHorizontalAlignment(SwingConstants.CENTER);
+		menuPrincipal.getPaneles()[1].add(puntajeActual);
 		
 		mejorPuntaje = new JLabel();
 		if(this.db.getPuntajes().size() < 1) {
@@ -125,7 +137,7 @@ public class EscenarioJuego implements KeyListener{
 			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
 		}
 		mejorPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
-		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 100));
+		mejorPuntaje.setFont(new Font("Agency FB", mejorPuntaje.getFont().getStyle(), 50));
 		menuPrincipal.getPaneles()[1].add(mejorPuntaje);
 		
 		//Game
@@ -227,6 +239,7 @@ public class EscenarioJuego implements KeyListener{
 	 */
 	public void update() {
 		lblPuntos.setText("Score: " + this.puntos);
+		puntajeActual.setText("Score: "+ this.puntosActual);
 		frame.getContentPane().repaint();
 	}
 	/**
@@ -286,6 +299,7 @@ public class EscenarioJuego implements KeyListener{
 	 */
 	public void addPunto() {
 		this.puntos++;
+		this.puntosActual = this.puntos;
 	}
 	/**
 	 * Método reinicia el puntaje
@@ -332,6 +346,12 @@ public class EscenarioJuego implements KeyListener{
 			System.exit(0);
 			
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_I) {
+			
+			info.setVisible(true);
+			
+		}else {
 
 		if(this.jugando == 1) {
 			pelota.velocidad = 0;
@@ -385,6 +405,8 @@ public class EscenarioJuego implements KeyListener{
 			this.update();
 			this.addMusic();
 		}
+		
+		}
 	}
 
 	@Override
@@ -398,6 +420,10 @@ public class EscenarioJuego implements KeyListener{
 	}
 
 	// Getters
+	public JFrame getFrame() {
+		return frame;
+	}
+	
 	public int getWindowH() {
 		return windowH;
 	}
