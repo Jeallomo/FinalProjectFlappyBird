@@ -14,10 +14,9 @@ import interfazGrafica.EscenarioJuego;
 /**
  * Declaración de clase Colisionador
  * @author Jesus Lozada
- * @version
  *
  */
-public class Colisionador extends Thread{
+public class Colisionador extends Hilo{
 	//Attributes
 	private Clip clip;
 	
@@ -105,5 +104,11 @@ public class Colisionador extends Thread{
 	 */
 	public void resumeThread() {
 		terminar = false;
+	}
+
+	@Override
+	public void pauseThread() {
+		// TODO Auto-generated method stub
+		
 	}
 }

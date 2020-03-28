@@ -26,6 +26,7 @@ public class Puntaje implements Serializable{
 	/**
 	 * Constructor Puntaje
 	 */
+	@SuppressWarnings("unchecked")
 	public Puntaje(){		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("puntos.txt"));

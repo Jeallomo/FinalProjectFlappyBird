@@ -2,7 +2,6 @@ package interfazGrafica;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -11,11 +10,14 @@ import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author Julian Espinoza
+ *
+ */
 @SuppressWarnings("serial")
 public class PanelMenuPrincipal extends JPanel {
-
 	// Components
 	private JLabel titulo;
 	private JPanel[] paneles = new JPanel[3];

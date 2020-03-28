@@ -30,7 +30,6 @@ import modelo.Puntaje;
 /**
  * Declaración de clase EscenarioJuego
  * @author Jesus Lozada.
- * @version 
  *
  */
 public class EscenarioJuego implements KeyListener{
