@@ -56,16 +56,10 @@ public class PanelMenuPrincipal extends JPanel {
 		paneles[1].setBackground(Color.WHITE);
 		add(paneles[1]);
 
-		JLabel aux = new JLabel("¡Oprime cualquier tecla para jugar!");
-		aux.setFont(new Font("Agency FB", aux.getFont().getStyle(), 35));
-		aux.setForeground(Color.BLUE.brighter());
-		aux.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel aux = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto1.png")));
 		aux.setVisible(true);
 
-		JLabel aux1 = new JLabel("Para salir oprimir Esc");
-		aux1.setFont(new Font("Agency FB", aux1.getFont().getStyle(), 35));
-		aux1.setForeground(Color.BLUE.darker());
-		aux1.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel aux1 = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto2.png")));
 		aux1.setVisible(true);
 
 		paneles[2] = new JPanel(){
