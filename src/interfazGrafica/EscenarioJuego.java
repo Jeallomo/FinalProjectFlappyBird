@@ -6,8 +6,10 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -32,7 +34,7 @@ import modelo.Puntaje;
  * @author Jesus Lozada.
  *
  */
-public class EscenarioJuego implements KeyListener{
+public class EscenarioJuego extends javax.swing.JFrame implements KeyListener{
 	// Objects
 	private Pajaro pelota;
 	private MovimientoTuberias tubos;
@@ -80,8 +82,12 @@ public class EscenarioJuego implements KeyListener{
 	/**
 	 * Constructor de ventana principal
 	 * @param db
+	 * @throws IOException 
 	 */
-	public EscenarioJuego(Puntaje db) {
+	public EscenarioJuego(Puntaje db) throws IOException {
+		Image logo = ImageIO.read(new File("bird 0.png"));
+		this.setIconImage(logo);
+		
 		this.db = db;
 		
 		frame = new JFrame("Flappy Bird");
