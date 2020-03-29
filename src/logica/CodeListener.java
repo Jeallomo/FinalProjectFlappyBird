@@ -26,6 +26,7 @@ public class CodeListener extends Thread implements KeyListener {
 	}
 
 	// Methods
+	@SuppressWarnings("deprecation")
 	public void run() {
 		while (true) {
 			if (codigo.indexOf("space") != -1) {

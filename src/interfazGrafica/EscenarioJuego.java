@@ -34,6 +34,7 @@ import modelo.Puntaje;
  * @author Jesus Lozada.
  *
  */
+@SuppressWarnings("serial")
 public class EscenarioJuego extends javax.swing.JFrame implements KeyListener{
 	// Objects
 	private Pajaro pelota;
@@ -82,11 +83,10 @@ public class EscenarioJuego extends javax.swing.JFrame implements KeyListener{
 	/**
 	 * Constructor de ventana principal
 	 * @param db
-	 * @throws IOException 
 	 */
+	@SuppressWarnings("deprecation")
 	public EscenarioJuego(Puntaje db) throws IOException {
-		Image logo = ImageIO.read(new File("bird 0.png"));
-		this.setIconImage(logo);
+		
 		
 		this.db = db;
 		

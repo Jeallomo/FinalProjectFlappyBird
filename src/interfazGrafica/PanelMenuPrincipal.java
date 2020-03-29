@@ -17,6 +17,7 @@ import javax.swing.JPanel;
  * @author Julian Espinoza
  *
  */
+@SuppressWarnings("serial")
 public class PanelMenuPrincipal extends JPanel {
 	// Components
 	private JLabel titulo;
