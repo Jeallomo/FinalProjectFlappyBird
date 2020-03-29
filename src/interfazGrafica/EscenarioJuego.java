@@ -6,10 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -84,7 +82,6 @@ public class EscenarioJuego extends javax.swing.JFrame implements KeyListener{
 	 * Constructor de ventana principal
 	 * @param db
 	 */
-	@SuppressWarnings("deprecation")
 	public EscenarioJuego(Puntaje db) throws IOException {
 		
 		

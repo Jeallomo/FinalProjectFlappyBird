@@ -188,14 +188,14 @@ public class Pajaro extends Hilo implements KeyListener {
 		try {
 			clip = AudioSystem.getClip();
 			if (this.juego.getActivePJ() == "bird/bird") {
-				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/jump.wav")));
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/effects/jump.wav")));
 			}
 			if (this.juego.getActivePJ() == "porky/porky") {
-				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/oink.wav")));
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/effects/oink.wav")));
 			}
 			if (this.juego.getActivePJ() == "space/space") {
 				clip.open(AudioSystem
-						.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/spaceship.wav")));
+						.getAudioInputStream(getClass().getResource("/audio/effects/spaceship.wav")));
 			}
 
 			FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

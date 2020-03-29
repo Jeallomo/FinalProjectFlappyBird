@@ -77,7 +77,7 @@ public class Colisionador extends Hilo {
 					try {
 						clip = AudioSystem.getClip();
 						clip.open(AudioSystem
-								.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/hit.wav")));
+								.getAudioInputStream(getClass().getResource("/audio/effects/hit.wav")));
 						FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 						volumen.setValue((float) -20.0);
 						clip.loop(0);
