@@ -252,7 +252,7 @@ public class EscenarioJuego implements KeyListener{
 			this.mejorPuntaje.setText("Best: 0");
 		} else {
 			this.mejorPuntaje.setText("Best: " + this.db.getPuntajes().get(0));
-		}
+		}	
 		
 		frame.removeKeyListener(pelota);
 		frame.removeKeyListener(cod);
