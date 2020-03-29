@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
@@ -16,11 +17,11 @@ import javax.swing.JPanel;
  * @author Julian Espinoza
  *
  */
-@SuppressWarnings("serial")
 public class PanelMenuPrincipal extends JPanel {
 	// Components
 	private JLabel titulo;
 	private JPanel[] paneles = new JPanel[3];
+	private ImageIcon imagenTitulo = new ImageIcon(getClass().getResource("/Imagenes/Logo.png"));
 
 	// Construct
 	public PanelMenuPrincipal(EscenarioJuego ej) {
@@ -29,7 +30,9 @@ public class PanelMenuPrincipal extends JPanel {
 		setSize(400, 350);
 		setOpaque(false);
 
-		titulo = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		titulo = new JLabel();
+		titulo.setBounds(20,10,300,80);
+		titulo.setIcon(new ImageIcon(imagenTitulo.getImage().getScaledInstance(300,80, Image.SCALE_SMOOTH)));
 
 		paneles[0] = new JPanel() {
 			protected void paintComponent(Graphics g) {
