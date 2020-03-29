@@ -13,14 +13,15 @@ import interfazGrafica.EscenarioJuego;
 
 /**
  * Declaración de clase Colisionador
+ * 
  * @author Jesus Lozada
  *
  */
-public class Colisionador extends Hilo{
-	//Attributes
+public class Colisionador extends Hilo {
+	// Attributes
 	private Clip clip;
-	
-	//Components
+
+	// Components
 	private JLabel bird;
 	private JLabel tb1;
 	private JLabel tb2;
@@ -30,10 +31,11 @@ public class Colisionador extends Hilo{
 	private JLabel t2;
 	private EscenarioJuego ej;
 	private boolean terminar;
-	
-	//Construct
+
+	// Construct
 	/**
 	 * Constructor Colisionador
+	 * 
 	 * @param bird
 	 * @param tb1
 	 * @param tb2
@@ -43,7 +45,8 @@ public class Colisionador extends Hilo{
 	 * @param t1
 	 * @param t2
 	 */
-	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4, EscenarioJuego ej, JLabel t1, JLabel t2) {
+	public Colisionador(JLabel bird, JLabel tb1, JLabel tb2, JLabel tb3, JLabel tb4, EscenarioJuego ej, JLabel t1,
+			JLabel t2) {
 		this.bird = bird;
 		this.tb1 = tb1;
 		this.tb2 = tb2;
@@ -54,51 +57,53 @@ public class Colisionador extends Hilo{
 		this.ej = ej;
 		this.terminar = false;
 	}
-	
-	//Methods
+
+	// Methods
 	/**
-	 * Metodo corre las condiciones actualizables de la colicione entre el pajaro y las tuberias
+	 * Metodo corre las condiciones actualizables de la colicione entre el pajaro y
+	 * las tuberias
 	 */
 	public void run() {
-		while(true) {
-			while(!terminar) {
-				if(this.bird.getBounds().intersects(this.tb1.getBounds()) || this.bird.getBounds().intersects(this.tb2.getBounds())
-						|| this.bird.getBounds().intersects(this.tb3.getBounds()) || this.bird.getBounds().intersects(this.tb4.getBounds())
-						|| this.bird.getBounds().intersects(this.t1.getBounds()) || this.bird.getBounds().intersects(this.t2.getBounds())) {
-					
-					//Reproducir sonido de golpe
+		while (true) {
+			while (!terminar) {
+				if (this.bird.getBounds().intersects(this.tb1.getBounds())
+						|| this.bird.getBounds().intersects(this.tb2.getBounds())
+						|| this.bird.getBounds().intersects(this.tb3.getBounds())
+						|| this.bird.getBounds().intersects(this.tb4.getBounds())
+						|| this.bird.getBounds().intersects(this.t1.getBounds())
+						|| this.bird.getBounds().intersects(this.t2.getBounds())) {
+
+					// Reproducir sonido de golpe
 					try {
 						clip = AudioSystem.getClip();
-						clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/hit.wav")));
+						clip.open(AudioSystem
+								.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/hit.wav")));
 						FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 						volumen.setValue((float) -20.0);
 						clip.loop(0);
 					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
-					
+
 					this.ej.stopMusic();
-					
+
 					this.ej.reset();
-					
+
 					terminar = true;
 				}
 				try {
 					Thread.sleep(1);
-				} catch (InterruptedException e) {	}
+				} catch (InterruptedException e) {
+				}
 			}
 			try {
 				Thread.sleep(1);
-			} catch (InterruptedException e) {	}
+			} catch (InterruptedException e) {
+			}
 		}
 	}
+
 	/**
 	 * Inicia la inhabilitacion del colisionador
 	 */
@@ -109,6 +114,6 @@ public class Colisionador extends Hilo{
 	@Override
 	public void pauseThread() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -45,7 +45,7 @@ public class PanelMenuPrincipal extends JPanel {
 		paneles[0].add(titulo);
 		add(paneles[0]);
 
-		paneles[1] = new JPanel(new GridLayout(2,1)){
+		paneles[1] = new JPanel(new GridLayout(2, 1)) {
 			protected void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -61,7 +61,7 @@ public class PanelMenuPrincipal extends JPanel {
 		JLabel aux = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/texto.png")));
 		aux.setVisible(true);
 
-		paneles[2] = new JPanel(){
+		paneles[2] = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
