@@ -31,9 +31,9 @@ public class PopUpInfo extends JFrame {
 	private JButton cerrar;
 
 	// Constants
-	private final int windowW = 400;
-	private final int windowH = 300;
-
+	private final int windowW = 500;
+	private final int windowH = 600;
+	
 	// Construct
 	/**
 	 * Constructor PopUpInfo
@@ -80,10 +80,10 @@ public class PopUpInfo extends JFrame {
 		spring.putConstraint(SpringLayout.NORTH, titulo, 5, SpringLayout.NORTH, opcsVentana);
 		add(opcsVentana, BorderLayout.NORTH);
 		opcsVentana.setVisible(true);
-
-		JLabel imagenManual = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
-
-		JLabel imagenCodes = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/Logo.png")));
+		
+		JLabel imagenManual = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/TUTORIAL.png")));
+		
+		JLabel imagenCodes = new JLabel(new ImageIcon(getClass().getResource("/Imagenes/listaCodes.png")));
 
 		manualDeUsuario = new JPanel();
 		manualDeUsuario.setVisible(true);
