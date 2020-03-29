@@ -29,7 +29,7 @@ public class Puntaje implements Serializable {
 	@SuppressWarnings("unchecked")
 	public Puntaje() {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("puntos.txt"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\flappybird\\puntos.txt"));
 			Object obj = ois.readObject();
 
 			if (obj != null) {
@@ -53,7 +53,7 @@ public class Puntaje implements Serializable {
 	 * @param puntos
 	 */
 	public void addPuntos(int puntos) {
-		File file = new File("puntos.txt");
+		File file = new File("C:\\flappybird\\puntos.txt");
 
 		puntajes.add(puntos);
 
@@ -62,7 +62,7 @@ public class Puntaje implements Serializable {
 		}
 
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("puntos.txt"));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\flappybird\\puntos.txt"));
 			oos.writeObject(this.puntajes);
 			oos.close();
 		} catch (FileNotFoundException fnfe) {
