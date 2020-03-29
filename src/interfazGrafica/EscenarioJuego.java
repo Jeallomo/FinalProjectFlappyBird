@@ -252,7 +252,7 @@ public class EscenarioJuego extends javax.swing.JFrame implements KeyListener{
 		
 		try {
 			music = AudioSystem.getClip();
-			music.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/audio/effects/game over.wav")));
+			music.open(AudioSystem.getAudioInputStream(getClass().getResource("/audio/effects/game over.wav")));
 			FloatControl volumen = (FloatControl) music.getControl(FloatControl.Type.MASTER_GAIN);
 			volumen.setValue((float) -30.0);
 			music.loop(0);
